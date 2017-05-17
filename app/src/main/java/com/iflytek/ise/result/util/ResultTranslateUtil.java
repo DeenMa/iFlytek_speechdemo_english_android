@@ -18,15 +18,15 @@ public class ResultTranslateUtil {
 	private static HashMap<String, String> special_content_map = new HashMap<String, String>();
 	
 	static {
-		dp_message_map.put(0, "正常");
-		dp_message_map.put(16, "漏读");
-		dp_message_map.put(32, "增读");
-		dp_message_map.put(64, "回读");
-		dp_message_map.put(128, "替换");
+		dp_message_map.put(0, "Normal");
+		dp_message_map.put(16, "Read missed");
+		dp_message_map.put(32, "Read extra");
+		dp_message_map.put(64, "Read back");
+		dp_message_map.put(128, "Replaced");
 		
-		special_content_map.put("sil", "静音");
-		special_content_map.put("silv", "静音");
-		special_content_map.put("fil", "噪音");
+		special_content_map.put("sil", "Mute");
+		special_content_map.put("silv", "Mute");
+		special_content_map.put("fil", "Noise");
 	}
 	
 	public static String getDpMessageInfo(int dp_message) {

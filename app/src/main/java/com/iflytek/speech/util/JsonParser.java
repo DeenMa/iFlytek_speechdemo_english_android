@@ -50,17 +50,17 @@ public class JsonParser {
 					JSONObject obj = items.getJSONObject(j);
 					if(obj.getString("w").contains("nomatch"))
 					{
-						ret.append("没有匹配结果.");
+						ret.append("No matching result.");
 						return ret.toString();
 					}
-					ret.append("【结果】" + obj.getString("w"));
-					ret.append("【置信度】" + obj.getInt("sc"));
+					ret.append("[Result]" + obj.getString("w"));
+					ret.append("[Confidence score]" + obj.getInt("sc"));
 					ret.append("\n");
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			ret.append("没有匹配结果.");
+			ret.append("No matching result.");
 		} 
 		return ret.toString();
 	}
@@ -79,18 +79,18 @@ public class JsonParser {
 					JSONObject obj = items.getJSONObject(j);
 					if(obj.getString("w").contains("nomatch"))
 					{
-						ret.append("没有匹配结果.");
+						ret.append("No matching result.");
 						return ret.toString();
 					}
-					ret.append("【结果】" + obj.getString("w"));
+					ret.append("[Result]" + obj.getString("w"));
 					ret.append("\n");
 				}
 			}
-			ret.append("【置信度】" + joResult.optInt("sc"));
+			ret.append("[Confidence score]" + joResult.optInt("sc"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			ret.append("没有匹配结果.");
+			ret.append("No matching result.");
 		} 
 		return ret.toString();
 	}

@@ -96,18 +96,18 @@ public class FucUtil {
 					if (i >= asrArray.length()) {
 						
 						SpeechUtility.getUtility().openEngineSettings(SpeechConstant.ENG_ASR);	
-						return "没有听写资源，跳转至资源下载页面";
+						return "No recognition resources, navigate to resource download page";
 					}
 				}else {
 					SpeechUtility.getUtility().openEngineSettings(SpeechConstant.ENG_ASR);
-					return "没有听写资源，跳转至资源下载页面";
+					return "No recognition resources, navigate to resource download page";
 				}
 				break;
 			case ErrorCode.ERROR_VERSION_LOWER:
-				return "语记版本过低，请更新后使用本地功能";
+				return "The version of VoiceNote is too low, please update before using the local feature";
 			case ErrorCode.ERROR_INVALID_RESULT:
 				SpeechUtility.getUtility().openEngineSettings(SpeechConstant.ENG_ASR);
-				return "获取结果出错，跳转至资源下载页面";
+				return "Error occurred when acquiring result, navigate to resource download page\n";
 			case ErrorCode.ERROR_SYSTEM_PREINSTALL:
 				//语记为厂商预置版本。
 			default:
@@ -115,7 +115,7 @@ public class FucUtil {
 			}
 		} catch (Exception e) {
 			SpeechUtility.getUtility().openEngineSettings(SpeechConstant.ENG_ASR);
-			return "获取结果出错，跳转至资源下载页面";
+			return "Error occurred when acquiring result, navigate to resource download page\n";
 		}
 		return "";
 	}

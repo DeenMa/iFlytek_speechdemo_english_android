@@ -50,12 +50,12 @@ public class SettingTextWatcher implements TextWatcher {
 			if (num > maxValue || num < minValue) {
 				s.delete(editStart, editStart+editCount);
 				mEditTextPreference.getEditText().setText(s);
-				Toast.makeText(mContext, "超出有效值范围", Toast.LENGTH_SHORT).show();
+				Toast.makeText(mContext, "Exceed valid range", Toast.LENGTH_SHORT).show();
 			}
 		}else {
 			s.delete(editStart, editStart+editCount);
 			mEditTextPreference.getEditText().setText(s);
-			Toast.makeText(mContext, "只能输入数字哦", Toast.LENGTH_SHORT).show();
+			Toast.makeText(mContext, "Only digits are allowed", Toast.LENGTH_SHORT).show();
 		}
 	}
 	

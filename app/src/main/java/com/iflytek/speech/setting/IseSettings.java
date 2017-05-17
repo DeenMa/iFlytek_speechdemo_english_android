@@ -53,14 +53,14 @@ public class IseSettings extends PreferenceActivity {
 
 		mToast = Toast.makeText(IseSettings.this, "", Toast.LENGTH_LONG);
 		
-		mLanguagePref.setSummary("当前：" + mLanguagePref.getEntry());
-		mCategoryPref.setSummary("当前：" + mCategoryPref.getEntry());
-		mResultLevelPref.setSummary("当前：" + mResultLevelPref.getEntry());
-		mVadBosPref.setSummary("当前：" + mVadBosPref.getText() + "ms");
-		mVadEosPref.setSummary("当前：" + mVadEosPref.getText() + "ms");
+		mLanguagePref.setSummary("Current: " + mLanguagePref.getEntry());
+		mCategoryPref.setSummary("Current: " + mCategoryPref.getEntry());
+		mResultLevelPref.setSummary("Current: " + mResultLevelPref.getEntry());
+		mVadBosPref.setSummary("Current: " + mVadBosPref.getText() + "ms");
+		mVadEosPref.setSummary("Current: " + mVadEosPref.getText() + "ms");
 		
 		String speech_timeout = mSpeechTimeoutPref.getText();
-		String summary = "当前：" + speech_timeout;
+		String summary = "Current: " + speech_timeout;
 		if (!"-1".equals(speech_timeout)) {
 			summary += "ms";
 		}
@@ -72,49 +72,49 @@ public class IseSettings extends PreferenceActivity {
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 				if ("zh_cn".equals(newValue.toString())) {
 					if ("plain".equals(mResultLevelPref.getValue())) {
-						showTip("汉语评测结果格式不支持plain设置");
+						showTip("Plain setup for the format of Chinese Evaluation result is not supported");
 						return false;
 					}
 				} else {
 					if ("read_syllable".equals(mCategoryPref.getValue())) {
-						showTip("英语评测不支持单字");
+						showTip("Single word for English Evaluation is not supported");
 						return false;
 					}
 				}
-				
+
 				int newValueIndex = mLanguagePref.findIndexOfValue(newValue.toString());
 				String newEntry = (String) mLanguagePref.getEntries()[newValueIndex];
-				mLanguagePref.setSummary("当前：" + newEntry);
+				mLanguagePref.setSummary("Current: " + newEntry);
 				return true;
 			}
 		});
-		
+
 		mCategoryPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-			
+
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 				if ("en_us".equals(mLanguagePref.getValue()) && "read_syllable".equals(newValue.toString())) {
-					showTip("英语评测不支持单字，请选其他项");
+					showTip("Single word for English Evaluation is not supported, please choose other options");
 					return false;
 				}
-				
+
 				int newValueIndex = mCategoryPref.findIndexOfValue(newValue.toString());
 				String newEntry = (String) mCategoryPref.getEntries()[newValueIndex];
-				mCategoryPref.setSummary("当前：" + newEntry);
+				mCategoryPref.setSummary("Current: " + newEntry);
 				return true;
 			}
 		});
-		
+
 		mResultLevelPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 				if ("zh_cn".equals(mLanguagePref.getValue()) && "plain".equals(newValue.toString())) {
-					showTip("汉语评测不支持plain，请选其他项");
+					showTip("Plain setup for the format of Chinese Evaluation result is not supported, please choose other options");
 					return false;
 				}
 				
-				mResultLevelPref.setSummary("当前：" + newValue.toString());
+				mResultLevelPref.setSummary("Current: " + newValue.toString());
 				return true;
 			}
 		});
@@ -128,15 +128,15 @@ public class IseSettings extends PreferenceActivity {
 				try {
 					bos = Integer.parseInt(newValue.toString());
 				} catch (Exception e) {
-					showTip("无效输入！");
+					showTip("Invalid input!");
 					return false;
 				}
 				if (bos < 0 || bos > 30000) {
-					showTip("取值范围为0~30000");
+					showTip("Range within 0 - 30,000");
 					return false;
 				}
 				
-				mVadBosPref.setSummary("当前：" + bos + "ms");
+				mVadBosPref.setSummary("Current: " + bos + "ms");
 				return true;
 			}
 		});
@@ -150,15 +150,15 @@ public class IseSettings extends PreferenceActivity {
 				try {
 					eos = Integer.parseInt(newValue.toString());
 				} catch (Exception e) {
-					showTip("无效输入！");
+					showTip("Invalid input!");
 					return false;
 				}
 				if (eos < 0 || eos > 30000) {
-					showTip("取值范围为0~30000");
+					showTip("Range within 0 - 30,000");
 					return false;
 				}
 				
-				mVadEosPref.setSummary("当前：" + eos + "ms");
+				mVadEosPref.setSummary("Current: " + eos + "ms");
 				return true;
 			}
 		});
@@ -172,19 +172,19 @@ public class IseSettings extends PreferenceActivity {
 				try {
 					speech_timeout = Integer.parseInt(newValue.toString());
 				} catch (Exception e) {
-					showTip("无效输入！");
+					showTip("Invalid input!");
 					return false;
 				}
 				 
 				if (speech_timeout < -1) {
-					showTip("必须大于等于-1");
+					showTip("Must be no less than -1");
 					return false;
 				}
 				
 				if (speech_timeout == -1) {
-					mSpeechTimeoutPref.setSummary("当前：-1");
+					mSpeechTimeoutPref.setSummary("Current: -1");
 				} else {
-					mSpeechTimeoutPref.setSummary("当前：" + speech_timeout + "ms");
+					mSpeechTimeoutPref.setSummary("Current: " + speech_timeout + "ms");
 				}
 				
 				return true;

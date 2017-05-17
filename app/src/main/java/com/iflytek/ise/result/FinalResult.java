@@ -18,6 +18,6 @@ public class FinalResult extends Result {
 	
 	@Override
 	public String toString() {
-		return "返回值：" + ret + "，总分：" + total_score;
+		return "Returned value: " + ret + ", total score: " + total_score;
 	}
 }

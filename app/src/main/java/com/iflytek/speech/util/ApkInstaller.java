@@ -24,9 +24,9 @@ public class ApkInstaller {
 
 	public void install(){
 		AlertDialog.Builder builder = new Builder(mActivity);
-		builder.setMessage("检测到您未安装语记！\n是否前往下载语记？");
-		builder.setTitle("下载提示");
-		builder.setPositiveButton("确认前往", new OnClickListener() {
+		builder.setMessage("VoiceNote app is not detected!\nProceed to download VoiceNote?");
+		builder.setTitle("Download tips");
+		builder.setPositiveButton("Confirm", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
@@ -35,7 +35,7 @@ public class ApkInstaller {
 				processInstall(mActivity, url,assetsApk);
 			}
 		});
-		builder.setNegativeButton("残忍拒绝", new OnClickListener() {
+		builder.setNegativeButton("Cancel", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();

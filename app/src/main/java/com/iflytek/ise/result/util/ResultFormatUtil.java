@@ -32,8 +32,8 @@ public class ResultFormatUtil {
 		}
 		
 		for (Sentence sentence: sentences ) {
-			if ("噪音".equals(ResultTranslateUtil.getContent(sentence.content)) 
-					|| "静音".equals(ResultTranslateUtil.getContent(sentence.content))) {
+			if ("Noise".equals(ResultTranslateUtil.getContent(sentence.content))
+					|| "Mute".equals(ResultTranslateUtil.getContent(sentence.content))) {
 				continue;
 			}
 			
@@ -41,28 +41,28 @@ public class ResultFormatUtil {
 				continue;
 			}
 			for (Word word: sentence.words) {
-				if ("噪音".equals(ResultTranslateUtil.getContent(word.content)) 
-						|| "静音".equals(ResultTranslateUtil.getContent(word.content))) {
+				if ("Noise".equals(ResultTranslateUtil.getContent(word.content))
+						|| "Mute".equals(ResultTranslateUtil.getContent(word.content))) {
 					continue;
 				}
 				
-				buffer.append("\n单词[" + ResultTranslateUtil.getContent(word.content) + "] ")
-					.append("朗读：" + ResultTranslateUtil.getDpMessageInfo(word.dp_message))
-					.append(" 得分：" + word.total_score);
+				buffer.append("\nWord[" + ResultTranslateUtil.getContent(word.content) + "] ")
+					.append("Read: " + ResultTranslateUtil.getDpMessageInfo(word.dp_message))
+					.append(" Score: " + word.total_score);
 				if (null == word.sylls) {
 					buffer.append("\n");
 					continue;
 				}
 				
 				for (Syll syll: word.sylls) {
-					buffer.append("\n└音节[" + ResultTranslateUtil.getContent(syll.getStdSymbol()) + "] ");
+					buffer.append("\n└Syllables[" + ResultTranslateUtil.getContent(syll.getStdSymbol()) + "] ");
 					if (null == syll.phones) {
 						continue;
 					}
 					
 					for (Phone phone: syll.phones) {
-						buffer.append("\n\t└音素[" + ResultTranslateUtil.getContent(phone.getStdSymbol()) + "] ")
-							.append(" 朗读：" + ResultTranslateUtil.getDpMessageInfo(phone.dp_message));
+						buffer.append("\n\t└Phoneme[" + ResultTranslateUtil.getContent(phone.getStdSymbol()) + "] ")
+							.append(" Read: " + ResultTranslateUtil.getDpMessageInfo(phone.dp_message));
 					}
 					
 				}
@@ -91,25 +91,25 @@ public class ResultFormatUtil {
 			}
 			
 			for (Word word: sentence.words) {
-				buffer.append("\n词语[" + ResultTranslateUtil.getContent(word.content) + "] " + word.symbol + " 时长：" + word.time_len);
+				buffer.append("\nWord[" + ResultTranslateUtil.getContent(word.content) + "] " + word.symbol + " 时长：" + word.time_len);
 				if (null == word.sylls) {
 					continue;
 				}
 				
 				for (Syll syll: word.sylls) {
-					if ("噪音".equals(ResultTranslateUtil.getContent(syll.content)) 
-							|| "静音".equals(ResultTranslateUtil.getContent(syll.content))) {
+					if ("Noice".equals(ResultTranslateUtil.getContent(syll.content))
+							|| "Mute".equals(ResultTranslateUtil.getContent(syll.content))) {
 						continue;
 					}
 					
-					buffer.append("\n└音节[" + ResultTranslateUtil.getContent(syll.content) + "] " + syll.symbol + " 时长：" + syll.time_len);
+					buffer.append("\n└Syllables[" + ResultTranslateUtil.getContent(syll.content) + "] " + syll.symbol + " 时长：" + syll.time_len);
 					if (null == syll.phones) {
 						continue;
 					}
 					
 					for (Phone phone: syll.phones) {
-						buffer.append("\n\t└音素[" + ResultTranslateUtil.getContent(phone.content) + "] " + "时长：" + phone.time_len)
-							.append(" 朗读：" + ResultTranslateUtil.getDpMessageInfo(phone.dp_message));
+						buffer.append("\n\t└Phoneme[" + ResultTranslateUtil.getContent(phone.content) + "] " + "时长：" + phone.time_len)
+							.append(" Word: " + ResultTranslateUtil.getDpMessageInfo(phone.dp_message));
 					}
 					
 				}

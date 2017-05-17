@@ -23,22 +23,22 @@ public class ReadWordResult extends Result {
 		StringBuffer buffer = new StringBuffer();
 		
 		if ("cn".equals(language)) {
-			buffer.append("[总体结果]\n")
-				.append("评测内容：" + content + "\n")
-				.append("朗读时长：" + time_len + "\n")
-				.append("总分：" + total_score + "\n\n")
-				.append("[朗读详情]")
+			buffer.append("[Overall result]\n")
+				.append("Evaluation content: " + content + "\n")
+				.append("Reading time length: " + time_len + "\n")
+				.append("Total score: " + total_score + "\n\n")
+				.append("[Reading details]")
 				.append(ResultFormatUtil.formatDetails_CN(sentences));
 		} else {
 			if (is_rejected) {
-				buffer.append("检测到乱读，")
+				buffer.append("Randomly reading detected，")
 				.append("except_info:" + except_info + "\n\n");	// except_info代码说明详见《语音评测参数、结果说明文档》
 			}
 			
-			buffer.append("[总体结果]\n")
-				.append("评测内容：" + content + "\n")
-				.append("总分：" + total_score + "\n\n")
-				.append("[朗读详情]")
+			buffer.append("[Overall result]\n")
+				.append("Evaluation content: " + content + "\n")
+				.append("Total score: " + total_score + "\n\n")
+				.append("[Reading details]")
 				.append(ResultFormatUtil.formatDetails_EN(sentences));
 		}
 		

@@ -33,25 +33,25 @@ public class XmlParser {
 			Element root = (Element) domDoc.getDocumentElement();
 			
 			Element raw = (Element)root.getElementsByTagName("rawtext").item(0);
-			buffer.append("【识别结果】" + raw.getFirstChild().getNodeValue());
+			buffer.append("[Recognition result]" + raw.getFirstChild().getNodeValue());
 			buffer.append("\n");
 			
 			Element e = (Element)root.getElementsByTagName("result").item(0);
 			
 			Element focus = (Element)e.getElementsByTagName("focus").item(0);
-			buffer.append("【FOCUS】" + focus.getFirstChild().getNodeValue());
+			buffer.append("[FOCUS]" + focus.getFirstChild().getNodeValue());
 			buffer.append("\n");
 			
 			Element action = (Element)e.getElementsByTagName("action").item(0);
 			Element operation = (Element)action.getElementsByTagName("operation").item(0);
-			buffer.append("【ACTION】" + operation.getFirstChild().getNodeValue());
+			buffer.append("[ACTION]" + operation.getFirstChild().getNodeValue());
 			buffer.append("\n");
 			
 
 		}catch(Exception e){
 			e.printStackTrace();
 		};
-		buffer.append("【ALL】" + xml);
+		buffer.append("[ALL]" + xml);
 		return buffer.toString();
 	}
 }

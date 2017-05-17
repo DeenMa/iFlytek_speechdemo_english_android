@@ -51,7 +51,7 @@ public class Result {
 	 * 是否乱读（cn）
 	 */
 	public boolean is_rejected;
-	/**
+	 /**
 	 * xml结果中的sentence标签
 	 */
 	public ArrayList<Sentence> sentences;
