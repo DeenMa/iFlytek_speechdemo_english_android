@@ -66,7 +66,7 @@ public class IseDemo extends Activity implements OnClickListener {
 				mIseStartButton.setEnabled(true);
 				mLastResult = builder.toString();
 				
-				showTip("评测结束");
+				showTip("Evaluation complete");
 			}
 		}
 
@@ -76,7 +76,7 @@ public class IseDemo extends Activity implements OnClickListener {
 			if(error != null) {	
 				showTip("error:"+ error.getErrorCode() + "," + error.getErrorDescription());
 				mResultEditText.setText("");
-				mResultEditText.setHint("请点击“开始评测”按钮");
+				mResultEditText.setHint("Please click \"Start evaluation\" button");
 			} else {
 				Log.d(TAG, "evaluator over");
 			}
@@ -96,8 +96,8 @@ public class IseDemo extends Activity implements OnClickListener {
 
 		@Override
 		public void onVolumeChanged(int volume, byte[] data) {
-			showTip("当前音量：" + volume);
-			Log.d(TAG, "返回音频数据："+data.length);
+			showTip("Current volumn: " + volume);
+			Log.d(TAG, "Return audio data: "+data.length);
 		}
 
 		@Override
@@ -150,7 +150,7 @@ public class IseDemo extends Activity implements OnClickListener {
 				String evaText = mEvaTextEditText.getText().toString();
 				mLastResult = null;
 				mResultEditText.setText("");
-				mResultEditText.setHint("请朗读以上内容");
+				mResultEditText.setHint("Please read the content above");
 				mIseStartButton.setEnabled(false);
 				
 				setParams();
@@ -165,13 +165,13 @@ public class IseDemo extends Activity implements OnClickListener {
 					if (null != result) {
 						mResultEditText.setText(result.toString());
 					} else {
-						showTip("解析结果为空");
+						showTip("The result is empty");
 					}
 				}
 				break;
 			case R.id.ise_stop:
 				if (mIse.isEvaluating()) {
-					mResultEditText.setHint("评测已停止，等待结果中...");
+					mResultEditText.setHint("The evaluation had stopped, waiting for the result...");
 					mIse.stopEvaluating();
 				}
 				break;
@@ -179,7 +179,7 @@ public class IseDemo extends Activity implements OnClickListener {
 				mIse.cancel();
 				mIseStartButton.setEnabled(true);
 				mResultEditText.setText("");
-				mResultEditText.setHint("请点击“开始评测”按钮");
+				mResultEditText.setHint("Please click \"Start evaluation\" button");
 				mLastResult = null;
 				break;
 			}
@@ -232,7 +232,7 @@ public class IseDemo extends Activity implements OnClickListener {
 		mEvaTextEditText.setText(text);
 		mResultEditText.setText("");
 		mLastResult = null;
-		mResultEditText.setHint("请点击“开始评测”按钮");
+		mResultEditText.setHint("Please click \"Start evaluation\" button");
 	}
 
 	private void showTip(String str) {

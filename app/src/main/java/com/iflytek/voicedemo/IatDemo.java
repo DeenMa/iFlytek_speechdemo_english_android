@@ -174,7 +174,7 @@ public class IatDemo extends Activity implements OnClickListener {
 				// 不显示听写对话框
 				ret = mIat.startListening(mRecognizerListener);
 				if (ret != ErrorCode.SUCCESS) {
-					showTip("听写失败,错误码：" + ret);
+					showTip("Recognition failed, error code: " + ret);
 				} else {
 					showTip(getString(R.string.text_begin));
 				}
@@ -193,7 +193,7 @@ public class IatDemo extends Activity implements OnClickListener {
 			// mIat.setParameter(SpeechConstant.ASR_SOURCE_PATH, "sdcard/XXX/XXX.pcm");
 			ret = mIat.startListening(mRecognizerListener);
 			if (ret != ErrorCode.SUCCESS) {
-				showTip("识别失败,错误码：" + ret);
+				showTip("Recognition failed, error code: " + ret);
 			} else {
 				byte[] audioData = FucUtil.readAudioFile(IatDemo.this, "iattest.wav");
 				
@@ -207,19 +207,19 @@ public class IatDemo extends Activity implements OnClickListener {
 					mIat.stopListening();
 				} else {
 					mIat.cancel();
-					showTip("读取音频流失败");
+					showTip("Failed to read the audio stream");
 				}
 			}
 			break;
 		// 停止听写
 		case R.id.iat_stop:
 			mIat.stopListening();
-			showTip("停止听写");
+			showTip("Stop recognition");
 			break;
 		// 取消听写
 		case R.id.iat_cancel:
 			mIat.cancel();
-			showTip("取消听写");
+			showTip("Cancel recognition");
 			break;
 		// 上传联系人
 		case R.id.iat_upload_contacts:
@@ -238,7 +238,7 @@ public class IatDemo extends Activity implements OnClickListener {
 			mIat.setParameter(SpeechConstant.TEXT_ENCODING, "utf-8");
 			ret = mIat.updateLexicon("userword", contents, mLexiconListener);
 			if (ret != ErrorCode.SUCCESS)
-				showTip("上传热词失败,错误码：" + ret);
+				showTip("Failed to upload the hot words, error code: " + ret);
 			break;
 		default:
 			break;
@@ -254,7 +254,7 @@ public class IatDemo extends Activity implements OnClickListener {
 		public void onInit(int code) {
 			Log.d(TAG, "SpeechRecognizer init() code = " + code);
 			if (code != ErrorCode.SUCCESS) {
-				showTip("初始化失败，错误码：" + code);
+				showTip("Initialization failed, error code: " + code);
 			}
 		}
 	};
@@ -282,7 +282,7 @@ public class IatDemo extends Activity implements OnClickListener {
 		@Override
 		public void onBeginOfSpeech() {
 			// 此回调表示：sdk内部录音机已经准备好了，用户可以开始语音输入
-			showTip("开始说话");
+			showTip("Start speaking");
 		}
 
 		@Override
@@ -296,7 +296,7 @@ public class IatDemo extends Activity implements OnClickListener {
 		@Override
 		public void onEndOfSpeech() {
 			// 此回调表示：检测到了语音的尾端点，已经进入识别过程，不再接受语音输入
-			showTip("结束说话");
+			showTip("Stop speaking");
 		}
 
 		@Override
@@ -311,8 +311,8 @@ public class IatDemo extends Activity implements OnClickListener {
 
 		@Override
 		public void onVolumeChanged(int volume, byte[] data) {
-			showTip("当前正在说话，音量大小：" + volume);
-			Log.d(TAG, "返回音频数据："+data.length);
+			showTip("Speaking, volumn: " + volume);
+			Log.d(TAG, "Return audio data: "+data.length);
 		}
 
 		@Override
@@ -387,7 +387,7 @@ public class IatDemo extends Activity implements OnClickListener {
 			mIat.setParameter(SpeechConstant.TEXT_ENCODING, "utf-8");
 			ret = mIat.updateLexicon("contact", contactInfos, mLexiconListener);
 			if (ret != ErrorCode.SUCCESS) {
-				showTip("上传联系人失败：" + ret);
+				showTip("Failed to upload contacts: " + ret);
 			}
 		}
 	};
@@ -400,7 +400,7 @@ public class IatDemo extends Activity implements OnClickListener {
 	/**
 	 * 参数设置
 	 * 
-	 * @param param
+	 * @param
 	 * @return
 	 */
 	public void setParam() {

@@ -59,12 +59,12 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case 5:
 			// 唤醒
-			showTip("请登录：http://www.xfyun.cn/ 下载体验吧！");
+			showTip("Please login: http://www.xfyun.cn/ to download and experience.");
 			break;
 		case 6:
 			// 声纹
 		default:
-			showTip("在IsvDemo中哦，为了代码简洁，就不放在一起啦，^_^");
+			showTip("Not supported yet");
 			break;
 		}
 		
@@ -74,8 +74,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	// Menu 列表
-	String items[] = { "立刻体验语音听写", "立刻体验语法识别", "立刻体验语义理解", "立刻体验语音合成",
-			"立刻体验语音评测", "立刻体验语音唤醒", "立刻体验声纹密码" };
+	String items[] = { "Automatic Speech Recognition", "Grammar Recognition", "Semantic Understanding", "Text to Speech",
+			"Speech evaluation", "Voice wakeup", "Voiceprint" };
 
 	private class SimpleAdapter extends BaseAdapter {
 		public View getView(int position, View convertView, ViewGroup parent) {

@@ -66,7 +66,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 		mAsr = SpeechRecognizer.createRecognizer(AsrDemo.this, mInitListener);		
 
 		// 初始化语法、命令词
-		mLocalLexicon = "张海羊\n刘婧\n王锋\n";
+		mLocalLexicon = "Alice\nBob\nCathy\n";
 		mLocalGrammar = FucUtil.readFile(this,"call.bnf", "utf-8");
 		mCloudGrammar = FucUtil.readFile(this,"grammar_sample.abnf","utf-8");
 		
@@ -123,13 +123,13 @@ public class AsrDemo extends Activity implements OnClickListener{
     @Override
 	public void onClick(View view) {		
 		if(null == mEngineType) {
-			showTip("请先选择识别引擎类型");
+			showTip("Please select the recognition engine type");
 			return;
 		}	
 		switch(view.getId())
 		{
 			case R.id.isr_grammar:
-				showTip("上传预设关键词/语法文件");
+				showTip("Upload pre-defined keyword / grammar file");
 				// 本地-构建语法文件，生成语法id
 				if (mEngineType.equals(SpeechConstant.TYPE_LOCAL)) {
 					((EditText)findViewById(R.id.isr_text)).setText(mLocalGrammar);
@@ -143,7 +143,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 							//未安装则跳转到提示安装页面
 							mInstaller.install();
 						}else {
-							showTip("语法构建失败,错误码：" + ret);
+							showTip("Grammar build failed, error code: " + ret);
 						}
 					}
 				}
@@ -156,7 +156,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 					mAsr.setParameter(SpeechConstant.TEXT_ENCODING,"utf-8");
 				    ret = mAsr.buildGrammar(GRAMMAR_TYPE_ABNF, mContent, mCloudGrammarListener);
 					if(ret != ErrorCode.SUCCESS)
-						showTip("语法构建失败,错误码：" + ret);
+						showTip("Grammar build failed, error code: " + ret);
 				}
 				
 				break;
@@ -173,7 +173,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 						//未安装则跳转到提示安装页面
 						mInstaller.install();
 					}else {
-						showTip("更新词典失败,错误码：" + ret);
+						showTip("Update dictionary failed, error code: " + ret);
 					}
 				}
 				break;
@@ -182,7 +182,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 				((EditText)findViewById(R.id.isr_text)).setText(null);// 清空显示内容
 				// 设置参数
 				if (!setParam()) {
-					showTip("请先构建语法。");
+					showTip("Please build grammar first");
 					return;
 				};
 				
@@ -192,19 +192,19 @@ public class AsrDemo extends Activity implements OnClickListener{
 						//未安装则跳转到提示安装页面
 						mInstaller.install();
 					}else {
-						showTip("识别失败,错误码: " + ret);	
+						showTip("Recognition failed, error code: " + ret);
 					}
 				}
 				break;
 			// 停止识别
 			case R.id.isr_stop:
 				mAsr.stopListening();
-				showTip("停止识别");
+				showTip("Stop recognition");
 				break;
 			// 取消识别
 			case R.id.isr_cancel:
 				mAsr.cancel();
-				showTip("取消识别");
+				showTip("Cancel recognition");
 				break;
 		}
 	}
@@ -218,7 +218,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 		public void onInit(int code) {
 			Log.d(TAG, "SpeechRecognizer init() code = " + code);
 			if (code != ErrorCode.SUCCESS) {
-        		showTip("初始化失败,错误码："+code);
+        		showTip("Initialization failed, error code: "+code);
         	}
 		}
     };
@@ -230,9 +230,9 @@ public class AsrDemo extends Activity implements OnClickListener{
 		@Override
 		public void onLexiconUpdated(String lexiconId, SpeechError error) {
 			if(error == null){
-				showTip("词典更新成功");
+				showTip("Dictionary update succeed");
 			}else{
-				showTip("词典更新失败,错误码："+error.getErrorCode());
+				showTip("Dictionary update failed, error code: "+error.getErrorCode());
 			}
 		}
 	};
@@ -244,9 +244,9 @@ public class AsrDemo extends Activity implements OnClickListener{
 		@Override
 		public void onBuildFinish(String grammarId, SpeechError error) {
 			if(error == null){
-				showTip("语法构建成功：" + grammarId);
+				showTip("Grammar build succeed: " + grammarId);
 			}else{
-				showTip("语法构建失败,错误码：" + error.getErrorCode());
+				showTip("Grammar build failed, error code: " + error.getErrorCode());
 			}			
 		}
 	};
@@ -262,9 +262,9 @@ public class AsrDemo extends Activity implements OnClickListener{
 				if(!TextUtils.isEmpty(grammarId))
 					editor.putString(KEY_GRAMMAR_ABNF_ID, grammarID);
 				editor.commit();
-				showTip("语法构建成功：" + grammarId);
+				showTip("Grammar build succeed: " + grammarId);
 			}else{
-				showTip("语法构建失败,错误码：" + error.getErrorCode());
+				showTip("Grammar build failed, error code: " + error.getErrorCode());
 			}			
 		}
 	};
@@ -285,8 +285,8 @@ public class AsrDemo extends Activity implements OnClickListener{
         
         @Override
         public void onVolumeChanged(int volume, byte[] data) {
-        	showTip("当前正在说话，音量大小：" + volume);
-        	Log.d(TAG, "返回音频数据："+data.length);
+        	showTip("Speaking, volumn: " + volume);
+        	Log.d(TAG, "Return audio data: "+data.length);
         }
         
         @Override
@@ -310,13 +310,13 @@ public class AsrDemo extends Activity implements OnClickListener{
         @Override
         public void onEndOfSpeech() {
         	// 此回调表示：检测到了语音的尾端点，已经进入识别过程，不再接受语音输入
-        	showTip("结束说话");
+        	showTip("Stop speaking");
         }
         
         @Override
         public void onBeginOfSpeech() {
         	// 此回调表示：sdk内部录音机已经准备好了，用户可以开始语音输入
-        	showTip("开始说话");
+        	showTip("Start speaking");
         }
 
 		@Override
@@ -350,7 +350,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 
 	/**
 	 * 参数设置
-	 * @param param
+	 * @param
 	 * @return 
 	 */
 	public boolean setParam(){

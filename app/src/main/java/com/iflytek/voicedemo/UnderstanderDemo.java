@@ -81,7 +81,7 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 		public void onInit(int code) {
 			Log.d(TAG, "speechUnderstanderListener init() code = " + code);
 			if (code != ErrorCode.SUCCESS) {
-        		showTip("初始化失败,错误码："+code);
+        		showTip("Initialization failed, error code: "+code);
         	}			
 		}
     };
@@ -95,7 +95,7 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 		public void onInit(int code) {
 			Log.d(TAG, "textUnderstanderListener init() code = " + code);
 			if (code != ErrorCode.SUCCESS) {
-        		showTip("初始化失败,错误码："+code);
+        		showTip("Initialization failed, error code: "+code);
         	}
 		}
     };
@@ -113,17 +113,17 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 		// 开始文本理解
 		case R.id.text_understander:
 			mUnderstanderText.setText("");
-			String text = "合肥明天的天气怎么样？";	
+			String text = "What is the weather like tomorrow in San Francisco?";
 			showTip(text);
 			
 			if(mTextUnderstander.isUnderstanding()){
 				mTextUnderstander.cancel();
-				showTip("取消");
+				showTip("Cancel");
 			}else {
 				ret = mTextUnderstander.understandText(text, mTextUnderstanderListener);
 				if(ret != 0)
 				{
-					showTip("语义理解失败,错误码:"+ ret);
+					showTip("Semantic Understanding failed, error code: "+ ret);
 				}
 			}
 			break;
@@ -135,11 +135,11 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 	
 			if(mSpeechUnderstander.isUnderstanding()){// 开始前检查状态
 				mSpeechUnderstander.stopUnderstanding();
-				showTip("停止录音");
+				showTip("Stop recording");
 			}else {
 				ret = mSpeechUnderstander.startUnderstanding(mSpeechUnderstanderListener);
 				if(ret != 0){
-					showTip("语义理解失败,错误码:"	+ ret);
+					showTip("Semantic Understanding failed, error code: "	+ ret);
 				}else {
 					showTip(getString(R.string.text_begin));
 				}
@@ -148,12 +148,12 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 		// 停止语音理解
 		case R.id.understander_stop:
 			mSpeechUnderstander.stopUnderstanding();
-			showTip("停止语义理解");
+			showTip("Stop semantic understanding");
 			break;
 		// 取消语音理解
 		case R.id.understander_cancel:
 			mSpeechUnderstander.cancel();
-			showTip("取消语义理解");
+			showTip("Cancel semantic understanding");
 			break;
 		default:
 			break;
@@ -172,7 +172,7 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 				}
 			} else {
 				Log.d(TAG, "understander result:null");
-				showTip("识别结果不正确。");
+				showTip("Incorrect recognition result");
 			}
 		}
 		
@@ -200,26 +200,26 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 					mUnderstanderText.setText(text);
 				}
 			} else {
-				showTip("识别结果不正确。");
+				showTip("Incorrect recognition result");
 			}	
 		}
     	
         @Override
         public void onVolumeChanged(int volume, byte[] data) {
-        	showTip("当前正在说话，音量大小：" + volume);
+        	showTip("Speaking, volumn " + volume);
         	Log.d(TAG, data.length+"");
         }
         
         @Override
         public void onEndOfSpeech() {
         	// 此回调表示：检测到了语音的尾端点，已经进入识别过程，不再接受语音输入
-        	showTip("结束说话");
+        	showTip("Stop speaking");
         }
         
         @Override
         public void onBeginOfSpeech() {
         	// 此回调表示：sdk内部录音机已经准备好了，用户可以开始语音输入
-        	showTip("开始说话");
+        	showTip("Start speaking");
         }
 
 		@Override
@@ -255,7 +255,7 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 	
 	/**
 	 * 参数设置
-	 * @param param
+	 * @param
 	 * @return 
 	 */
 	public void setParam(){

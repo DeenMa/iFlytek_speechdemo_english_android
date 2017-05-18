@@ -151,7 +151,7 @@ public class TtsDemo extends Activity implements OnClickListener {
 					//未安装则跳转到提示安装页面
 					mInstaller.install();
 				}else {
-					showTip("语音合成失败,错误码: " + code);	
+					showTip("TTS failed, error code: " + code);
 				}
 			}
 			break;
@@ -181,7 +181,7 @@ public class TtsDemo extends Activity implements OnClickListener {
 		switch (mRadioGroup.getCheckedRadioButtonId()) {
 		// 选择在线合成
 		case R.id.tts_radioCloud:			
-			new AlertDialog.Builder(this).setTitle("在线合成发音人选项")
+			new AlertDialog.Builder(this).setTitle("TTS speaker options")
 				.setSingleChoiceItems(mCloudVoicersEntries, // 单选框有几项,各是什么名字
 						selectedNum, // 默认的选项
 						new DialogInterface.OnClickListener() { // 点击单选框后的处理
@@ -220,7 +220,7 @@ public class TtsDemo extends Activity implements OnClickListener {
 		public void onInit(int code) {
 			Log.d(TAG, "InitListener init() code = " + code);
 			if (code != ErrorCode.SUCCESS) {
-        		showTip("初始化失败,错误码："+code);
+        		showTip("Initialization failed, error code: "+code);
         	} else {
 				// 初始化成功，之后可以调用startSpeaking方法
         		// 注：有的开发者在onCreate方法中创建完合成对象之后马上就调用startSpeaking进行合成，
@@ -236,17 +236,17 @@ public class TtsDemo extends Activity implements OnClickListener {
 		
 		@Override
 		public void onSpeakBegin() {
-			showTip("开始播放");
+			showTip("Start playing");
 		}
 
 		@Override
 		public void onSpeakPaused() {
-			showTip("暂停播放");
+			showTip("Pause playing");
 		}
 
 		@Override
 		public void onSpeakResumed() {
-			showTip("继续播放");
+			showTip("Resume playing");
 		}
 
 		@Override
@@ -269,7 +269,7 @@ public class TtsDemo extends Activity implements OnClickListener {
 		@Override
 		public void onCompleted(SpeechError error) {
 			if (error == null) {
-				showTip("播放完成");
+				showTip("Playing complete");
 			} else if (error != null) {
 				showTip(error.getPlainDescription(true));
 			}
@@ -293,7 +293,7 @@ public class TtsDemo extends Activity implements OnClickListener {
 
 	/**
 	 * 参数设置
-	 * @param param
+	 * @param
 	 * @return 
 	 */
 	private void setParam(){
