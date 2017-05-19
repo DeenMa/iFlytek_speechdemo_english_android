@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="讯飞听写示例"
+            android:text="iFLYTEK Short form ASR Demo"
             android:textSize="30sp" />
 
         <ImageButton
@@ -43,7 +43,7 @@
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="听写类型"
+        android:contentDescription="ASR Type"
         android:orientation="horizontal" >
 
         <RadioButton
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
-            android:text="云端" >
+            android:text="Cloud" >
         </RadioButton>
 
         <RadioButton
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="本地" >
+            android:text="Local" >
         </RadioButton>
 
         <RadioButton
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="混合" >
+            android:text="Mixed" >
         </RadioButton>
     </RadioGroup>
 
@@ -85,7 +85,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="开始"
+            android:text="Start"
             android:textSize="20sp" />
 
         <Button
@@ -93,7 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="停止"
+            android:text="Stop"
             android:textSize="20sp" />
 
         <Button
@@ -101,7 +101,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="取消"
+            android:text="Cancel"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -110,14 +110,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="音频流识别"
+        android:text="Audio Stream Recognition"
         android:textSize="20sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="上传联系人、词表，可以使云端识别联系人和词表更加准确，这里上传的内容对语义理解同样有效。"
+        android:text="Uploading Contacts and dictionary can make the recognition of contacts and dictionary more accurate on the cloud. The uploaded content also applies to the semantic understanding"
         android:textSize="@dimen/txt_size" />
 
     <LinearLayout
@@ -133,7 +133,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="上传联系人"
+            android:text="Upload contacts"
             android:textSize="17sp" />
 
         <Button
@@ -141,7 +141,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="上传词表"
+            android:text="Upload dictionary"
             android:textSize="17sp" />
     </LinearLayout>
 

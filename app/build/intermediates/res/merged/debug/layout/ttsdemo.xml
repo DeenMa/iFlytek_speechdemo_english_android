@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="讯飞合成示例"
+            android:text="iFLYTEK Text to Speech Demo"
             android:textSize="30sp" />
 
         <ImageButton
@@ -59,14 +59,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checked="true"
-                android:text="在线合成" />
+                android:text="Online" />
 
             <RadioButton
                 android:id="@+id/tts_radioLocal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="本地合成" />
+                android:text="Local" />
         </RadioGroup>
 
         <Button
@@ -74,7 +74,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="发音人" />
+            android:text="Speaker" />
     </LinearLayout>
 
     <LinearLayout
@@ -90,7 +90,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="开始合成"
+            android:text="Start TTS"
             android:textSize="20sp" />
 
         <Button
@@ -98,7 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="取消"
+            android:text="Cancel"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -115,7 +115,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="暂停播放"
+            android:text="Pause playing"
             android:textSize="20sp" />
 
         <Button
@@ -123,7 +123,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="继续播放"
+            android:text="Continue playing"
             android:textSize="20sp" />
     </LinearLayout>
 

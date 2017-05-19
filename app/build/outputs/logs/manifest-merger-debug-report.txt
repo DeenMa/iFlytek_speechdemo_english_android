@@ -18,7 +18,7 @@ ADDED from E:\20170516 English Android Demo\app\src\main\AndroidManifest.xml:2:1
 application
 ADDED from E:\20170516 English Android Demo\app\src\main\AndroidManifest.xml:7:5-68:19
 	android:label
-		ADDED from E:\20170516 English Android Demo\app\src\main\AndroidManifest.xml:10:9-31
+		ADDED from E:\20170516 English Android Demo\app\src\main\AndroidManifest.xml:10:9-43
 	android:icon
 		ADDED from E:\20170516 English Android Demo\app\src\main\AndroidManifest.xml:8:9-38
 	android:name
@@ -28,7 +28,7 @@ ADDED from E:\20170516 English Android Demo\app\src\main\AndroidManifest.xml:11:
 	android:screenOrientation
 		ADDED from E:\20170516 English Android Demo\app\src\main\AndroidManifest.xml:16:13-49
 	android:label
-		ADDED from E:\20170516 English Android Demo\app\src\main\AndroidManifest.xml:15:13-35
+		ADDED from E:\20170516 English Android Demo\app\src\main\AndroidManifest.xml:15:13-47
 	android:configChanges
 		ADDED from E:\20170516 English Android Demo\app\src\main\AndroidManifest.xml:13:13-133
 	android:icon

@@ -2,28 +2,28 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <EditTextPreference
-        android:dialogTitle="请输入语速:在线(0-100)本地(0-200)"
+        android:dialogTitle="Please input speed: Online(0-100)Local(0-200)"
         android:key="speed_preference"
         android:defaultValue="50"
-        android:summary="默认值：50 "
-        android:title="语速" />
+        android:summary="Default: 50 "
+        android:title="Speed" />
     <EditTextPreference
-        android:dialogTitle="请输入音调(0-100)"
+        android:dialogTitle="Please input tone (0-100)"
         android:key="pitch_preference"
         android:defaultValue="50"
-        android:summary="默认值：50 "
-        android:title="音调" />
+        android:summary="Default: 50 "
+        android:title="Tone" />
     <EditTextPreference
-        android:dialogTitle="请输入音量(0-100)"
+        android:dialogTitle="Please input volumn (0-100)"
         android:key="volume_preference"
         android:defaultValue="50"
-        android:summary="默认值：50 "
-        android:title="音量" />
+        android:summary="Default: 50"
+        android:title="Volumn" />
     <ListPreference
         android:defaultValue="3"
         android:entries="@array/stream_entries"
         android:entryValues="@array/stream_values"
         android:key="stream_preference"
-        android:title="音频流类型" />
+        android:title="Audio stream type" />
 
 </PreferenceScreen>

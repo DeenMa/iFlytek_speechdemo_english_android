@@ -23,12 +23,12 @@
     <application
         android:name="com.iflytek.voicedemo.SpeechApp"
         android:icon="@drawable/icon"
-        android:label="讯飞语音示例" >
+        android:label="iFLYTEK SpeechDemo" >
         <activity
             android:name="com.iflytek.voicedemo.MainActivity"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|fontScale"
             android:icon="@drawable/icon"
-            android:label="讯飞语音示例"
+            android:label="iFLYTEK SpeechDemo"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

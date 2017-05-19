@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="讯飞语义示例"
+            android:text="iFLYTEK Open Semantic Demo"
             android:textSize="30sp" />
 
         <ImageButton
@@ -53,7 +53,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="文本语义"
+            android:text="Text semantic"
             android:textSize="20sp" />
 
         <Button
@@ -61,7 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="语音语义"
+            android:text="Speech semantic"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -78,7 +78,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="停止录音"
+            android:text="Stop recording"
             android:textSize="20sp" />
 
         <Button
@@ -86,7 +86,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="取消"
+            android:text="Cancel"
             android:textSize="20sp" />
     </LinearLayout>
 

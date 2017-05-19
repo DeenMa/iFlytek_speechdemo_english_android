@@ -2,31 +2,31 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" > 
     <ListPreference
         android:key="understander_language_preference"
-        android:title="语言设置"
+        android:title="Language settings"
         android:entries="@array/language_entries"
         android:entryValues="@array/language_values"
-        android:summary="支持：普通话，粤语，英语 "
+        android:summary="Support: Mandarin, Cantonese, English"
         android:defaultValue="mandarin"  />
     <EditTextPreference
         android:key="understander_vadbos_preference"   
-		android:title="前端点超时" 
-		android:dialogTitle="请输入时间(0-10000)ms"
-        android:summary="默认值：短信转写5000，其他4000"
+		android:title="Front end-point time exceed"
+		android:dialogTitle="Please input time (0-10000)ms"
+        android:summary="Default: SMS transcription 5000, others 4000"
 		android:defaultValue="4000" />
     
     <EditTextPreference
         android:key="understander_vadeos_preference"   
-		android:title="后端点超时" 
-		android:dialogTitle="请输入时间(0-10000)ms"
-        android:summary="默认值：短信转写1800，其他700 "
+		android:title="Back end-point time exceed"
+		android:dialogTitle="Please input time (0-10000)ms"
+        android:summary="Default: SMS transcription 1800, others 700"
 		android:defaultValue="700" />
     
     <ListPreference
         android:key="understander_punc_preference"
-        android:title="标点符号"
+        android:title="Punctuations"
         android:entries="@array/punc_entries"
         android:entryValues="@array/punc_values"
-        android:summary="默认值：有标点 "
+        android:summary="Default: have punctuations"
         android:defaultValue="1"  />
     
 <!--     <CheckBoxPreference -->

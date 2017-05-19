@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="讯飞评测示例"
+            android:text="iFLYTEK Speech Evaluation Demo"
             android:textSize="30sp" />
 
         <ImageButton
@@ -44,7 +44,7 @@
         android:layout_weight="1"
         android:editable="false"
         android:gravity="top|left"
-        android:hint="请点击“开始评测”按钮"
+        android:hint="Please select \“Start Evaluating\” button"
         android:textSize="16sp" />
 
     <LinearLayout
@@ -60,7 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="开始评测"
+            android:text="Start evaluating"
             android:textSize="20sp" />
 
         <Button
@@ -68,7 +68,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="停止评测"
+            android:text="Stop evaluating"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -85,7 +85,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="取消评测"
+            android:text="Cancel evaluting"
             android:textSize="20sp" />
 
         <Button
@@ -93,7 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="结果解析"
+            android:text="Result analysis"
             android:textSize="20sp" />
     </LinearLayout>
 

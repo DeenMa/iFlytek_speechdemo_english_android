@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\Administrator\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\18.0.0\support-v4-18.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
+        <dex dex="E:\20170516 English Android Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-v4-18.0.0_4b5a6ed7e9e22e88e5c55e2e8f15ad0f8f4e50c4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\20170516 English Android Demo\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6b56721b7c4225d1e46ec7467cb370c3d15ddba5">
+        <dex dex="E:\20170516 English Android Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_41973b3214162b185d30a9172724d48732e02ad5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\20170516 English Android Demo\app\libs\Msc.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d5b88f9b0f2ebaa459163f646654fbc1e45a34d4">
+        <dex dex="E:\20170516 English Android Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\Msc_2dc121708db74b7b25e16dbab0c90cff955af577\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\20170516 English Android Demo\app\libs\Sunflower.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="53ee0bd79ae7a08a4876dfc2087ff2314c4095a1">
+        <dex dex="E:\20170516 English Android Demo\app\build\intermediates\transforms\dex\debug\folders\1000\2\Sunflower_d5903f0f003172289ce8d55506e397f40aa95ce6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\20170516 English Android Demo\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="87cd8d5f59ebfc536a542160e2062c4b3886b8e3">
+        <dex dex="E:\20170516 English Android Demo\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_5f9b4a99c18aef15d65967200eaaa35b17dbcb32\classes.dex" />
+    </item>
+
+</items>
