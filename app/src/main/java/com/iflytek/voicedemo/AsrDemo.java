@@ -35,16 +35,16 @@ import com.iflytek.sunflower.FlowerCollector;
 
 public class AsrDemo extends Activity implements OnClickListener{
 	private static String TAG = AsrDemo.class.getSimpleName();
-	// 语音识别对象
+	// Speech recognition object
 	private SpeechRecognizer mAsr;
 	private Toast mToast;	
-	// 缓存
+	// Cache
 	private SharedPreferences mSharedPreferences;
-	// 本地语法文件
+	// Local grammar file
 	private String mLocalGrammar = null;
-	// 本地词典
+	// Local dictionary
 	private String mLocalLexicon = null;
-	// 云端语法文件
+	// Cloud grammar file
 	private String mCloudGrammar = null;
 		
 	private static final String KEY_GRAMMAR_ABNF_ID = "grammar_abnf_id";
@@ -52,7 +52,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 	private static final String GRAMMAR_TYPE_BNF = "bnf";
 
 	private String mEngineType = null;
-	// 语记安装助手类
+	// VoiceNote installation assistant class
 	ApkInstaller mInstaller ;
 	
 	@SuppressLint("ShowToast")
@@ -62,15 +62,15 @@ public class AsrDemo extends Activity implements OnClickListener{
 		setContentView(R.layout.isrdemo);
 		initLayout();
 		
-		// 初始化识别对象
+		// Initializes the recognition object
 		mAsr = SpeechRecognizer.createRecognizer(AsrDemo.this, mInitListener);		
 
-		// 初始化语法、命令词
+		// Initializes the grammar, command word
 		mLocalLexicon = "Alice\nBob\nCathy\n";
 		mLocalGrammar = FucUtil.readFile(this,"call.bnf", "utf-8");
 		mCloudGrammar = FucUtil.readFile(this,"grammar_sample.abnf","utf-8");
 		
-		// 获取联系人，本地更新词典时使用
+		// Used when getting the contact and updating the local dictionary
 		ContactManager mgr = ContactManager.createManager(AsrDemo.this, mContactListener);	
 		mgr.asyncQueryAllContactsName();
 		mSharedPreferences = getSharedPreferences(getPackageName(),	MODE_PRIVATE);
@@ -80,7 +80,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 	}
 	
 	/**
-	 * 初始化Layout。
+	 * Initialize Layout
 	 */
 	private void initLayout() {
 		findViewById(R.id.isr_recognize).setOnClickListener(AsrDemo.this);
@@ -89,7 +89,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 		findViewById(R.id.isr_stop).setOnClickListener(AsrDemo.this);
 		findViewById(R.id.isr_cancel).setOnClickListener(AsrDemo.this);
 
-		//选择云端or本地
+		// Selects the cloud or local
 		RadioGroup group = (RadioGroup)this.findViewById(R.id.radioGroup);
 		group.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
@@ -104,8 +104,8 @@ public class AsrDemo extends Activity implements OnClickListener{
 					findViewById(R.id.isr_lexcion).setEnabled(true);
 					mEngineType = SpeechConstant.TYPE_LOCAL;
 					/**
-					 * 选择本地合成
-					 * 判断是否安装语记,未安装则跳转到提示安装页面
+					 * Select Local synthesis
+					 * Determine whether the VoiceNote has been installed, skips to the page to prompt installation if not installed
 					 */
 					if (!SpeechUtility.getUtility().checkServiceInstalled()) {
 						mInstaller.install();
@@ -115,9 +115,9 @@ public class AsrDemo extends Activity implements OnClickListener{
 		});
 	}
 	
-	// 语法、词典临时变量
+	// Grammar, dictionary temporary variable
 	String mContent;
-	// 函数调用返回值
+	// Returned value for function call
     int ret = 0;
 	
     @Override
@@ -130,28 +130,28 @@ public class AsrDemo extends Activity implements OnClickListener{
 		{
 			case R.id.isr_grammar:
 				showTip("Upload pre-defined keyword / grammar file");
-				// 本地-构建语法文件，生成语法id
+				// Local - Builds grammar file, generates the grammar id
 				if (mEngineType.equals(SpeechConstant.TYPE_LOCAL)) {
 					((EditText)findViewById(R.id.isr_text)).setText(mLocalGrammar);
 					mContent = new String(mLocalGrammar);
 					mAsr.setParameter(SpeechConstant.TEXT_ENCODING,"utf-8");
-					//指定引擎类型
+					// Specifies the engine type
 					mAsr.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
 					ret = mAsr.buildGrammar(GRAMMAR_TYPE_BNF, mContent, mLocalGrammarListener);
 					if(ret != ErrorCode.SUCCESS){
 						if(ret == ErrorCode.ERROR_COMPONENT_NOT_INSTALLED){
-							//未安装则跳转到提示安装页面
+							// Skips to the page to prompt installation if not installed
 							mInstaller.install();
 						}else {
 							showTip("Grammar build failed, error code: " + ret);
 						}
 					}
 				}
-				// 在线-构建语法文件，生成语法id
+				// Online - Builds the grammar file, generates the grammar id
 				else {	
 					((EditText)findViewById(R.id.isr_text)).setText(mCloudGrammar);
 					mContent = new String(mCloudGrammar);
-					//指定引擎类型
+					// Specifies the engine type
 					mAsr.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
 					mAsr.setParameter(SpeechConstant.TEXT_ENCODING,"utf-8");
 				    ret = mAsr.buildGrammar(GRAMMAR_TYPE_ABNF, mContent, mCloudGrammarListener);
@@ -160,27 +160,27 @@ public class AsrDemo extends Activity implements OnClickListener{
 				}
 				
 				break;
-			// 本地-更新词典      注意:更新词典需要在接收到构建语法回调onBuildFinish之后进行，否则会导致错误。
+			// Local -Update dictionary. Note: Updating dictionary must occur after the build grammar callback onBuildFinish is received
 			case R.id.isr_lexcion: 
 				((EditText)findViewById(R.id.isr_text)).setText(mLocalLexicon);
 				mContent = new String(mLocalLexicon);
-				//指定引擎类型
+				// Specify engine type
 				mAsr.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_LOCAL);
 				mAsr.setParameter(SpeechConstant.GRAMMAR_LIST, "call");
 				ret = mAsr.updateLexicon("<contact>", mContent, mLexiconListener);
 				if(ret != ErrorCode.SUCCESS){
 					if(ret == ErrorCode.ERROR_COMPONENT_NOT_INSTALLED){
-						//未安装则跳转到提示安装页面
+						// Skips to the page to prompt installation if not installed
 						mInstaller.install();
 					}else {
 						showTip("Update dictionary failed, error code: " + ret);
 					}
 				}
 				break;
-			// 开始识别
+			// Starts recognition
 			case R.id.isr_recognize:
-				((EditText)findViewById(R.id.isr_text)).setText(null);// 清空显示内容
-				// 设置参数
+				((EditText)findViewById(R.id.isr_text)).setText(null);// Empty the display
+				// Sets parameter
 				if (!setParam()) {
 					showTip("Please build grammar first");
 					return;
@@ -189,19 +189,19 @@ public class AsrDemo extends Activity implements OnClickListener{
 				ret = mAsr.startListening(mRecognizerListener);
 				if (ret != ErrorCode.SUCCESS) {
 					if(ret == ErrorCode.ERROR_COMPONENT_NOT_INSTALLED){
-						//未安装则跳转到提示安装页面
+						// Skips to the page to prompt installation if not installed
 						mInstaller.install();
 					}else {
 						showTip("Recognition failed, error code: " + ret);
 					}
 				}
 				break;
-			// 停止识别
+			// Stop recognition
 			case R.id.isr_stop:
 				mAsr.stopListening();
 				showTip("Stop recognition");
 				break;
-			// 取消识别
+			// Cancel the recognition
 			case R.id.isr_cancel:
 				mAsr.cancel();
 				showTip("Cancel recognition");
@@ -210,7 +210,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 	}
 	
 	/**
-     * 初始化监听器。
+     * Initializes the listener
      */
     private InitListener mInitListener = new InitListener() {
 
@@ -224,7 +224,7 @@ public class AsrDemo extends Activity implements OnClickListener{
     };
     	
 	/**
-     * 更新词典监听器。
+     * Update dictionary listener
      */
 	private LexiconListener mLexiconListener = new LexiconListener() {
 		@Override
@@ -238,7 +238,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 	};
 	
 	/**
-     * 本地构建语法监听器。
+     * Locally built grammar listener
      */
 	private GrammarListener mLocalGrammarListener = new GrammarListener() {
 		@Override
@@ -251,7 +251,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 		}
 	};
 	/**
-     * 云端构建语法监听器。
+     * Cloud-based built grammar listener
      */
 	private GrammarListener mCloudGrammarListener = new GrammarListener() {
 		@Override
@@ -269,17 +269,17 @@ public class AsrDemo extends Activity implements OnClickListener{
 		}
 	};
 	/**
-	 * 获取联系人监听器。
+	 * Gets the contact listener
 	 */
 	private ContactListener mContactListener = new ContactListener() {
 		@Override
 		public void onContactQueryFinish(String contactInfos, boolean changeFlag) {
-			//获取联系人
+			// Gets the contact
 			mLocalLexicon = contactInfos;
 		}		
 	};
 	/**
-     * 识别监听器。
+     * Recognize the listener
      */
     private RecognizerListener mRecognizerListener = new RecognizerListener() {
         
@@ -300,7 +300,7 @@ public class AsrDemo extends Activity implements OnClickListener{
         			text = JsonParser.parseLocalGrammarResult(result.getResultString());
         		}
         		
-        		// 显示
+        		// Display
         		((EditText)findViewById(R.id.isr_text)).setText(text);                
         	} else {
         		Log.d(TAG, "recognizer result : null");
@@ -309,13 +309,13 @@ public class AsrDemo extends Activity implements OnClickListener{
         
         @Override
         public void onEndOfSpeech() {
-        	// 此回调表示：检测到了语音的尾端点，已经进入识别过程，不再接受语音输入
+        	// This callback indicates: the end of speech has been detected, the recognition process starts and no speech input is accepted
         	showTip("Stop speaking");
         }
         
         @Override
         public void onBeginOfSpeech() {
-        	// 此回调表示：sdk内部录音机已经准备好了，用户可以开始语音输入
+        	// This callback indicates: the internal recorder for sdk has been ready for user to start speech input
         	showTip("Start speaking");
         }
 
@@ -326,8 +326,8 @@ public class AsrDemo extends Activity implements OnClickListener{
 
 		@Override
 		public void onEvent(int eventType, int arg1, int arg2, Bundle obj) {
-			// 以下代码用于获取与云端的会话id，当业务出错时将会话id提供给技术支持人员，可用于查询会话日志，定位出错原因
-			// 若使用本地能力，会话id为null
+			// The following codes are used to get the session id used for cloud, when the transaction throws error, the id will be provided to the technical support staff for them to query session log and locate the error cause
+			// If the local feature is used, the session id is null
 			//	if (SpeechEvent.EVENT_SESSION_ID == eventType) {
 			//		String sid = obj.getString(SpeechEvent.KEY_EVENT_SESSION_ID);
 			//		Log.d(TAG, "session id =" + sid);
@@ -349,15 +349,15 @@ public class AsrDemo extends Activity implements OnClickListener{
 	}
 
 	/**
-	 * 参数设置
+	 * Parameter setting
 	 * @param
 	 * @return 
 	 */
 	public boolean setParam(){
 		boolean result = false;
-		//设置识别引擎
+		// Sets the recognition engine
 		mAsr.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
-		//设置返回结果为json格式
+		// Sets the returned result to jsonformat
 		mAsr.setParameter(SpeechConstant.RESULT_TYPE, "json");
 
 		if("cloud".equalsIgnoreCase(mEngineType))
@@ -367,20 +367,20 @@ public class AsrDemo extends Activity implements OnClickListener{
 			{
 				result =  false;
 			}else {
-				//设置云端识别使用的语法id
+				// Sets the grammar id to be used by cloud recognition
 				mAsr.setParameter(SpeechConstant.CLOUD_GRAMMAR, grammarId);
 				result =  true;
 			}
 		} else {
-			//设置本地识别使用语法id
+			// Sets the grammar id to be used by local recognition
 			mAsr.setParameter(SpeechConstant.LOCAL_GRAMMAR, "call");
-			//设置本地识别的门限值
+			// Sets the threshold for local recognition
 			mAsr.setParameter(SpeechConstant.ASR_THRESHOLD, "30");
 			result = true;
 		}
-		
-		// 设置音频保存路径，保存音频格式支持pcm、wav，设置路径为sd卡请注意WRITE_EXTERNAL_STORAGE权限
-		// 注：AUDIO_FORMAT参数语记需要更新版本才能生效
+
+		// Sets the save path of the audio, The audio save format supports pcm, wav. If you set the path to sd card, Please pay attention to the WRITE_EXTERNAL_STORAGE right
+		// Note:   For the AUDIO_FORMAT parameter, VoiceNote needs to update version to take effect
 		mAsr.setParameter(SpeechConstant.AUDIO_FORMAT,"wav");
 		mAsr.setParameter(SpeechConstant.ASR_AUDIO_PATH, Environment.getExternalStorageDirectory()+"/msc/asr.wav");
 		return result;
@@ -389,14 +389,14 @@ public class AsrDemo extends Activity implements OnClickListener{
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		// 退出时释放连接
+		// Releases the connection when exiting
 		mAsr.cancel();
 		mAsr.destroy();
 	}
 	
 	@Override
 	protected void onResume() {
-		//移动数据统计分析
+		// Statistical analysis of mobile data
 		FlowerCollector.onResume(AsrDemo.this);
 		FlowerCollector.onPageStart(TAG);
 		super.onResume();
@@ -404,7 +404,7 @@ public class AsrDemo extends Activity implements OnClickListener{
 	
 	@Override
 	protected void onPause() {
-		//移动数据统计分析
+		// Statistical analysis of mobile data
 		FlowerCollector.onPageEnd(TAG);
 		FlowerCollector.onPause(AsrDemo.this);
 		super.onPause();

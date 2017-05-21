@@ -9,7 +9,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 /**
- * Xml结果解析类
+ * Xml result parse class
  */
 public class XmlParser {
 
@@ -29,7 +29,7 @@ public class XmlParser {
 			InputStream is = new ByteArrayInputStream(xml.getBytes());
 			domDoc = domBuilder.parse(is);
 
-			// 获取根节点
+			// Gets the root node
 			Element root = (Element) domDoc.getDocumentElement();
 			
 			Element raw = (Element)root.getElementsByTagName("rawtext").item(0);

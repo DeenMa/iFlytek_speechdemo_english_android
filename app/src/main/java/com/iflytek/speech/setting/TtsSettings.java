@@ -12,7 +12,7 @@ import com.iflytek.voicedemo.R;
 
 
 /**
- * 合成设置界面
+ * Synthesis setting interface
  */
 public class TtsSettings extends PreferenceActivity implements OnPreferenceChangeListener {
 	
@@ -26,7 +26,7 @@ public class TtsSettings extends PreferenceActivity implements OnPreferenceChang
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
-		// 指定保存文件名字
+		// Specify the name of the saved file
 		getPreferenceManager().setSharedPreferencesName(PREFER_NAME);
 		addPreferencesFromResource(R.xml.tts_setting);
 		mSpeedPreference = (EditTextPreference)findPreference("speed_preference");

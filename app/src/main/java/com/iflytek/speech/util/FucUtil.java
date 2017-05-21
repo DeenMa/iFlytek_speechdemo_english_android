@@ -13,11 +13,11 @@ import com.iflytek.cloud.SpeechUtility;
 import android.content.Context;
 
 /**
- * 功能性函数扩展类
+ * Utility function expansion class
  */
 public class FucUtil {
 	/**
-	 * 读取asset目录下文件。
+	 * Reads files under the asset directory
 	 * @return content
 	 */
 	public static String readFile(Context mContext,String file,String code)
@@ -38,10 +38,10 @@ public class FucUtil {
 		return result;
 	}
 	/**
-	 * 将字节缓冲区按照固定大小进行分割成数组
-	 * @param buffer 缓冲区
-	 * @param length 缓冲区大小
-	 * @param spsize 切割块大小
+	 * Divide the byte cache into arrays of fixed size
+	 * @param buffer Cache
+	 * @param length Cache size
+	 * @param spsize Block size
 	 * @return
 	 */
 	public ArrayList<byte[]> splitBuffer(byte[] buffer,int length,int spsize)
@@ -70,10 +70,10 @@ public class FucUtil {
 		return array;
 	}
 	/**
-	 * 获取语记是否包含离线听写资源，如未包含跳转至资源下载页面
-	 *1.PLUS_LOCAL_ALL: 本地所有资源 
-      2.PLUS_LOCAL_ASR: 本地识别资源
-      3.PLUS_LOCAL_TTS: 本地合成资源
+	 * Finds whether the VoiceNote contains offline Short Form ASR resource, skips to the resource download page if not contain
+	 *1.PLUS_LOCAL_ALL: All local resources
+      2.PLUS_LOCAL_ASR: Local recognition resource
+      3.PLUS_LOCAL_TTS: Local synthesis resource
 	 */
 	public static String checkLocalResource(){
 		String resource = SpeechUtility.getUtility().getParameter(SpeechConstant.PLUS_LOCAL_ASR);
@@ -85,11 +85,11 @@ public class FucUtil {
 				JSONArray asrArray = result.getJSONObject("result").optJSONArray("asr");
 				if (asrArray != null) {
 					int i = 0;
-					// 查询否包含离线听写资源
+					// Finds whether to contain offline Short Form ASR resource
 					for (; i < asrArray.length(); i++) {
 						if("iat".equals(asrArray.getJSONObject(i).get(SpeechConstant.DOMAIN))){
-							//asrArray中包含语言、方言字段，后续会增加支持方言的本地听写。
-							//如："accent": "mandarin","language": "zh_cn"
+							// asrArray contains languages and dialects fields, support for dialect Short Form ASR (local) will be added in the future
+							// Such as："accent": "mandarin","language": "zh_cn"
 							break;
 						}
 					}
@@ -109,7 +109,7 @@ public class FucUtil {
 				SpeechUtility.getUtility().openEngineSettings(SpeechConstant.ENG_ASR);
 				return "Error occurred when acquiring result, navigate to resource download page\n";
 			case ErrorCode.ERROR_SYSTEM_PREINSTALL:
-				//语记为厂商预置版本。
+				// Voicenote is the vendor built-in version
 			default:
 				break;
 			}
@@ -121,9 +121,9 @@ public class FucUtil {
 	}
 	
 	/**
-	 * 读取asset目录下音频文件。
+	 * Read the audio files under asset directory
 	 * 
-	 * @return 二进制文件数据
+	 * @return Binary file data
 	 */
 	public static byte[] readAudioFile(Context context, String filename) {
 		try {

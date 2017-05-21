@@ -12,7 +12,7 @@ import com.iflytek.sunflower.FlowerCollector;
 import com.iflytek.voicedemo.R;
 
 /**
- * 语义理解设置界面
+ * Semantic understanding setting interface
  */
 public class UnderstanderSettings extends PreferenceActivity implements OnPreferenceChangeListener {
 	private static final String TAG = UnderstanderSettings.class.getSimpleName();
@@ -41,7 +41,7 @@ public class UnderstanderSettings extends PreferenceActivity implements OnPrefer
 	
 	@Override
 	protected void onResume() {
-		// 开放统计 移动数据统计分析
+		// Open statistical: Statistical analysis of mobile data
 		FlowerCollector.onResume(UnderstanderSettings.this);
 		FlowerCollector.onPageStart(TAG);
 		super.onResume();
@@ -49,7 +49,7 @@ public class UnderstanderSettings extends PreferenceActivity implements OnPrefer
 	
 	@Override
 	protected void onPause() {
-		// 开放统计 移动数据统计分析
+		// Open statistical: Statistical analysis of mobile data
 		FlowerCollector.onPageEnd(TAG);
 		FlowerCollector.onPause(UnderstanderSettings.this);
 		super.onPause();

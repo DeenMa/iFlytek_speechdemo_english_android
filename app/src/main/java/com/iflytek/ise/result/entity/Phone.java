@@ -7,14 +7,14 @@ import java.util.HashMap;
 
 /**
  * <p>Title: Phone</p>
- * <p>Description: 音素，对应于xml结果中的Phone标签</p>
+ * <p>Description: phoneme, corresponds to the Phone label in the xml result</p>
  * <p>Company: www.iflytek.com</p>
  * @author iflytek
- * @date 2015年1月12日 下午3:55:56
+ * @date Jan 12, 2015 15:55:56
  */
 public class Phone {
 	/**
-	 * 讯飞音标-标准音标映射表（en）
+	 * iFlytek Phonetic -Standard Phonetic Mapping Table (en)
 	 */
 	public static HashMap<String, String> phone_map = new HashMap<String, String>();
 	
@@ -70,28 +70,28 @@ public class Phone {
 	}
 	
 	/**
-	 * 开始帧位置，每帧相当于10ms
+	 * The position of the beginning frame,  each frame is equivalent to 10ms
 	 */
 	public int beg_pos;
 	/**
-	 * 结束帧位置
+	 * The position of the ending frame
 	 */
 	public int end_pos;
 	/**
-	 * 音素内容
+	 * The phoneme content
 	 */
 	public String content;
 	/**
-	 * 增漏读信息：0（正确），16（漏读），32（增读），64（回读），128（替换）
+	 * Adds/Misses information: 0(Correct), 16(Miss), 32(Add), 64(Readback), 128(Replace)
 	 */
 	public int dp_message;
 	/**
-	 * 时长（单位：帧，每帧相当于10ms）（cn）
+	 * Duration (Unit: Frame, each frame is equivalent to 10ms) (cn)
 	 */
 	public int time_len;
 	
 	/**
-	 * 得到content对应的标准音标（en）
+	 * Gets the standard phonetic corresponding to content (en)
 	 */
 	public String getStdSymbol() {
 		return getStdSymbol(content);

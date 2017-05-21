@@ -10,7 +10,7 @@ import java.util.HashMap;
  * <p>Description: </p>
  * <p>Company: www.iflytek.com</p>
  * @author iflytek
- * @date 2015年1月13日 下午6:05:03
+ * @date Jan 13, 2015 18:05:03
  */
 public class ResultTranslateUtil {
 	

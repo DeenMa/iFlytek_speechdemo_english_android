@@ -9,14 +9,14 @@ import android.text.TextWatcher;
 import android.widget.Toast;
 
 /**
- * 输入框输入范围控制
+ * Input box input range control
  */
 public class SettingTextWatcher implements TextWatcher {
 	private int editStart ;
 	private int editCount ;
 	private EditTextPreference mEditTextPreference;
-	int minValue;//最小值
-	int maxValue;//最大值
+	int minValue;// Minimum
+	int maxValue;// Maximum
 	private Context mContext;
 	
 	public SettingTextWatcher(Context context,EditTextPreference e,int min, int max) {
@@ -60,7 +60,7 @@ public class SettingTextWatcher implements TextWatcher {
 	}
 	
 	/**
-	 * 正则表达式-判断是否为数字
+	 * Regular expression - determine whether it is a digit
 	 */
 	public static boolean isNumeric(String str){ 
 	    Pattern pattern = Pattern.compile("[0-9]*"); 

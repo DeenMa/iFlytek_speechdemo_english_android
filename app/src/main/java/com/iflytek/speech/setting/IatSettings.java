@@ -11,7 +11,7 @@ import com.iflytek.speech.util.SettingTextWatcher;
 import com.iflytek.voicedemo.R;
 
 /**
- * 听写设置界面
+ * Short Form ASR setting interface
  */
 public class IatSettings extends PreferenceActivity implements OnPreferenceChangeListener {
 	

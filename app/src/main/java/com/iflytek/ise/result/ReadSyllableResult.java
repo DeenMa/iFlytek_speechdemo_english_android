@@ -7,10 +7,10 @@ import com.iflytek.ise.result.util.ResultFormatUtil;
 
 /**
  * <p>Title: ReadSyllableResult</p>
- * <p>Description: 中文单字评测结果</p>
+ * <p>Description: Chinese single word evaluation result</p>
  * <p>Company: www.iflytek.com</p>
  * @author iflytek
- * @date 2015年1月12日 下午5:03:14
+ * @date Jan 12, 2015 17:03:14
  */
 public class ReadSyllableResult extends Result {
 	

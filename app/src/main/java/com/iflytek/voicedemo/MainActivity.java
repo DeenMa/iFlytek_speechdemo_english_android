@@ -38,31 +38,31 @@ public class MainActivity extends Activity implements OnClickListener {
 		Intent intent = null;
 		switch (tag) {
 		case 0:
-			// 语音转写
+			// Long Form ASR
 			intent = new Intent(MainActivity.this, IatDemo.class);
 			break;
 		case 1:
-			// 语法识别
+			// Grammar recognition
 			intent = new Intent(MainActivity.this, AsrDemo.class);
 			break;
 		case 2:
-			// 语义理解
+			// Semantic understanding
 			intent = new Intent(MainActivity.this, UnderstanderDemo.class);
 			break;
 		case 3:
-			// 语音合成
+			// Text-to-Speech (TTS)
 			intent = new Intent(MainActivity.this, TtsDemo.class);
 			break;
 		case 4:
-			// 语音评测
+			// Speech evaluation
 			intent = new Intent(MainActivity.this, IseDemo.class);
 			break;
 		case 5:
-			// 唤醒
+			// Wakeup
 			showTip("Please login: http://www.xfyun.cn/ to download and experience.");
 			break;
 		case 6:
-			// 声纹
+			// Voiceprint
 		default:
 			showTip("Not supported yet");
 			break;
@@ -73,7 +73,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	// Menu 列表
+	// Menu list
 	String items[] = { "Automatic Speech Recognition", "Grammar Recognition", "Semantic Understanding", "Text to Speech",
 			"Speech evaluation", "Voice wakeup", "Voiceprint" };
 
@@ -116,7 +116,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onResume() {
-		// 开放统计 移动数据统计分析
+		// Open statistical: Statistical analysis of mobile data
 		FlowerCollector.onResume(MainActivity.this);
 		FlowerCollector.onPageStart(TAG);
 		super.onResume();
@@ -124,7 +124,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onPause() {
-		// 开放统计 移动数据统计分析
+		// Open statistical: Statistical analysis of mobile data
 		FlowerCollector.onPageEnd(TAG);
 		FlowerCollector.onPause(MainActivity.this);
 		super.onPause();

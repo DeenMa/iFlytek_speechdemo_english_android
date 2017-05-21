@@ -7,50 +7,50 @@ import java.util.ArrayList;
 
 /**
  * <p>Title: Word</p>
- * <p>Description: 单词，对应于结果xml中的word标签</p>
+ * <p>Description: Word, corresponds to the word label in the xml</p>
  * <p>Company: www.iflytek.com</p>
  * @author iflytek
- * @date 2015年1月12日 下午3:29:30
+ * @date Jan 12, 2015 15:29:30
  */
 public class Word {
 	/**
-	 * 开始帧位置，每帧相当于10ms
+	 * The position of the beginning frame, each frame is equivalent to 10ms
 	 */
 	public int beg_pos;
 	/**
-	 * 结束帧位置
+	 * The position of ending frame
 	 */
 	public int end_pos;
 	/**
-	 * 单词内容
+	 * Word content
 	 */
 	public String content;
 	/**
-	 * 增漏读信息：0（正确），16（漏读），32（增读），64（回读），128（替换）
+	 * Adds/Misses information: 0(Correct), 16(Miss), 32(Add), 64(Readback), 128(Replace)
 	 */
 	public int dp_message;
 	/**
-	 * 单词在全篇索引（en）
+	 * The index of word in full text(en)
 	 */
 	public int global_index;
 	/**
-	 * 单词在句子中的索引（en）
+	 * The index of word in sentence (en)
 	 */
 	public int index;
 	/**
-	 * 拼音（cn），数字代表声调，5表示轻声，如fen1
+	 * Pinyin (cn), the number indicates tone, 5 indicates neutral tone, such as fen1
 	 */
 	public String symbol;
 	/**
-	 * 时长（单位：帧，每帧相当于10ms）（cn）
+	 * Duration (Unit: frame, each frame is equivalent to 10ms) (cn)
 	 */
 	public int time_len;
 	/**
-	 * 单词得分（en）
+	 * The word score (en)
 	 */
 	public float total_score;
 	/**
-	 * Word包含的Syll
+	 * Syll included in word
 	 */
 	public ArrayList<Syll> sylls;
 	

@@ -15,15 +15,15 @@ import com.iflytek.ise.result.entity.Word;
  * <p>Description: </p>
  * <p>Company: www.iflytek.com</p>
  * @author iflytek
- * @date 2015年1月19日 上午10:01:14
+ * @date Jan 19, 2015 10:01:14
  */
 public class ResultFormatUtil {
 	
 	/**
-	 * 将英语评测详情按格式输出
+	 * Outputs the English evaluation detail by format
 	 * 
 	 * @param sentences
-	 * @return 英语评测详情
+	 * @return English evaluation details
 	 */
 	public static String formatDetails_EN(ArrayList<Sentence> sentences) {
 		StringBuffer buffer = new StringBuffer();
@@ -74,10 +74,10 @@ public class ResultFormatUtil {
 	}
 
 	/**
-	 * 将汉语评测详情按格式输出
+	 * Outputs the Chinese evaluation details by format
 	 * 
 	 * @param sentences
-	 * @return 汉语评测详情
+	 * @return Chinese evaluation details
 	 */
 	public static String formatDetails_CN(ArrayList<Sentence> sentences) {
 		StringBuffer buffer = new StringBuffer();

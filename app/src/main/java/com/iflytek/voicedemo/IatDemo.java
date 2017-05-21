@@ -43,19 +43,19 @@ import com.iflytek.sunflower.FlowerCollector;
 
 public class IatDemo extends Activity implements OnClickListener {
 	private static String TAG = IatDemo.class.getSimpleName();
-	// 语音听写对象
+	// Short Form ASR object
 	private SpeechRecognizer mIat;
-	// 语音听写UI
+	// Short Form ASR UI
 	private RecognizerDialog mIatDialog;
-	// 用HashMap存储听写结果
+	// Stores the Short Form ASR result through HashMap
 	private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();
 
 	private EditText mResultText;
 	private Toast mToast;
 	private SharedPreferences mSharedPreferences;
-	// 引擎类型
+	// Engine type
 	private String mEngineType = SpeechConstant.TYPE_CLOUD;
-	// 语记安装助手类
+	// VoiceNote install assistant class
 	ApkInstaller mInstaller;
 	
 
@@ -66,12 +66,12 @@ public class IatDemo extends Activity implements OnClickListener {
 		setContentView(R.layout.iatdemo);
 
 		initLayout();
-		// 初始化识别无UI识别对象
-		// 使用SpeechRecognizer对象，可根据回调消息自定义界面；
+		// The initialization recognition has no UI recognition object
+		// With SpeechRecognizer object, the UI can be customized according to callback message
 		mIat = SpeechRecognizer.createRecognizer(IatDemo.this, mInitListener);
 		
-		// 初始化听写Dialog，如果只使用有UI听写功能，无需创建SpeechRecognizer
-		// 使用UI听写功能，请根据sdk文件目录下的notice.txt,放置布局文件和图片资源
+		// Initializes the ASR Dialog, if you only use the ASR feature with UI , it's not necessary to create the SpeechRecognizer
+		// Uses the UI Short Form ASR feature, according to the notice.txt under the sdk file directory, place the layout file and picture resource
 		mIatDialog = new RecognizerDialog(IatDemo.this, mInitListener);
 
 		mSharedPreferences = getSharedPreferences(IatSettings.PREFER_NAME,
@@ -82,7 +82,7 @@ public class IatDemo extends Activity implements OnClickListener {
 	}
 
 	/**
-	 * 初始化Layout。
+	 * Initializes  the Layout
 	 */
 	private void initLayout() {
 		findViewById(R.id.iat_recognize).setOnClickListener(IatDemo.this);
@@ -92,7 +92,7 @@ public class IatDemo extends Activity implements OnClickListener {
 		findViewById(R.id.iat_stop).setOnClickListener(IatDemo.this);
 		findViewById(R.id.iat_cancel).setOnClickListener(IatDemo.this);
 		findViewById(R.id.image_iat_set).setOnClickListener(IatDemo.this);
-		// 选择云端or本地
+		// Selects the cloud end or the local end
 		RadioGroup group = (RadioGroup) findViewById(R.id.radioGroup);
 		group.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -109,7 +109,7 @@ public class IatDemo extends Activity implements OnClickListener {
 					findViewById(R.id.iat_upload_contacts).setEnabled(false);
 					findViewById(R.id.iat_upload_userwords).setEnabled(false);
 					/**
-					 * 选择本地听写 判断是否安装语记,未安装则跳转到提示安装页面
+					 * Selects the local Short Form ASR to determine whether the VoiceNote has been installed, skips to the page to prompt installation if not installed
 					 */
 					if (!SpeechUtility.getUtility().checkServiceInstalled()) {
 						mInstaller.install();
@@ -125,7 +125,7 @@ public class IatDemo extends Activity implements OnClickListener {
 					findViewById(R.id.iat_upload_contacts).setEnabled(false);
 					findViewById(R.id.iat_upload_userwords).setEnabled(false);
 					/**
-					 * 选择本地听写 判断是否安装语记,未安装则跳转到提示安装页面
+					 * Selects the local Short Form ASR to determine whether the VoiceNote has been installed, skips to the page to prompt installation if not installed
 					 */
 					if (!SpeechUtility.getUtility().checkServiceInstalled()) {
 						mInstaller.install();
@@ -143,35 +143,35 @@ public class IatDemo extends Activity implements OnClickListener {
 		});
 	}
 
-	int ret = 0; // 函数调用返回值
+	int ret = 0; // Returned value for function call
 
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
-		// 进入参数设置页面
+		// Go to the Parameter setting page
 		case R.id.image_iat_set:
 			Intent intents = new Intent(IatDemo.this, IatSettings.class);
 			startActivity(intents);
 			break;
-		// 开始听写
-		// 如何判断一次听写结束：OnResult isLast=true 或者 onError
+		// Starts the Short Form ASR
+		// How to determine the ending of a Short Form ASR: OnResult isLast=true or onError
 		case R.id.iat_recognize:
-			// 移动数据分析，收集开始听写事件
+			// Mobile data analysis, collects the Short Form ASR start event
 			FlowerCollector.onEvent(IatDemo.this, "iat_recognize");
 			
-			mResultText.setText(null);// 清空显示内容
+			mResultText.setText(null);// Clears the contents displayed
 			mIatResults.clear();
-			// 设置参数
+			// Sets parameter
 			setParam();
 			boolean isShowDialog = mSharedPreferences.getBoolean(
 					getString(R.string.pref_key_iat_show), true);
 			if (isShowDialog) {
-				// 显示听写对话框
+				// Displays the Short Form ASR dialog box
 				mIatDialog.setListener(mRecognizerDialogListener);
 				mIatDialog.show();
 				showTip(getString(R.string.text_begin));
 			} else {
-				// 不显示听写对话框
+				// Does not display the Short Form ASR dialog box
 				ret = mIat.startListening(mRecognizerListener);
 				if (ret != ErrorCode.SUCCESS) {
 					showTip("Recognition failed, error code: " + ret);
@@ -180,15 +180,15 @@ public class IatDemo extends Activity implements OnClickListener {
 				}
 			}
 			break;
-		// 音频流识别
+		// Audio stream recognition
 		case R.id.iat_recognize_stream:
-			mResultText.setText(null);// 清空显示内容
+			mResultText.setText(null);// Clear the contents displayed
 			mIatResults.clear();
-			// 设置参数
+			// Sets parameter
 			setParam();
-			// 设置音频来源为外部文件
+			// Sets the audio source to external file
 			mIat.setParameter(SpeechConstant.AUDIO_SOURCE, "-1");
-			// 也可以像以下这样直接设置音频文件路径识别（要求设置文件在sdcard上的全路径）：
+			// You can also set the audio file path recognition directly as shown below（requires the full path to the setup file on the sdcard）：
 			// mIat.setParameter(SpeechConstant.AUDIO_SOURCE, "-2");
 			// mIat.setParameter(SpeechConstant.ASR_SOURCE_PATH, "sdcard/XXX/XXX.pcm");
 			ret = mIat.startListening(mRecognizerListener);
@@ -199,10 +199,11 @@ public class IatDemo extends Activity implements OnClickListener {
 				
 				if (null != audioData) {
 					showTip(getString(R.string.text_begin_recognizer));
-					// 一次（也可以分多次）写入音频文件数据，数据格式必须是采样率为8KHz或16KHz（本地识别只支持16K采样率，云端都支持），位长16bit，单声道的wav或者pcm
-					// 写入8KHz采样的音频时，必须先调用setParameter(SpeechConstant.SAMPLE_RATE, "8000")设置正确的采样率
-					// 注：当音频过长，静音部分时长超过VAD_EOS将导致静音后面部分不能识别。
-					// 音频切分方法：FucUtil.splitBuffer(byte[] buffer,int length,int spsize);
+					// Writes the audio file data for one time (or several times), the data format must be mono wav or pcm with sampling rate of 8KHz or 16KHz(the local  only supports sampling rate of 16K, the cloud end support both), bit length of 16bit
+					// Before writing the audio with sampling rate of 8KHz, the setParameter(SpeechConstant.SAMPLE_RATE, "8000") must be called to set the correct sampling rate
+					//
+					// Note: If the audio is too long and the mute duration exceeds VAD_EOS, that will cause the content behind the mute can not be recognized
+					// Audio segmentation method: FucUtil.splitBuffer(byte[] buffer,int length,int spsize);
 					mIat.writeAudio(audioData, 0, audioData.length);
 					mIat.stopListening();
 				} else {
@@ -211,29 +212,29 @@ public class IatDemo extends Activity implements OnClickListener {
 				}
 			}
 			break;
-		// 停止听写
+		// Stops the Short Form ASR
 		case R.id.iat_stop:
 			mIat.stopListening();
 			showTip("Stop recognition");
 			break;
-		// 取消听写
+		// Cancels the Short Form ASR
 		case R.id.iat_cancel:
 			mIat.cancel();
 			showTip("Cancel recognition");
 			break;
-		// 上传联系人
+		// Uploads the contact
 		case R.id.iat_upload_contacts:
 			showTip(getString(R.string.text_upload_contacts));
 			ContactManager mgr = ContactManager.createManager(IatDemo.this,
 					mContactListener);
 			mgr.asyncQueryAllContactsName();
 			break;
-		// 上传用户词表
+		// Uploads the customized word hint list
 		case R.id.iat_upload_userwords:
 			showTip(getString(R.string.text_upload_userwords));
 			String contents = FucUtil.readFile(IatDemo.this, "userwords","utf-8");
 			mResultText.setText(contents);
-			// 指定引擎类型
+			// Specify engine type
 			mIat.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD);
 			mIat.setParameter(SpeechConstant.TEXT_ENCODING, "utf-8");
 			ret = mIat.updateLexicon("userword", contents, mLexiconListener);
@@ -246,7 +247,7 @@ public class IatDemo extends Activity implements OnClickListener {
 	}
 
 	/**
-	 * 初始化监听器。
+	 * Initializes the listener
 	 */
 	private InitListener mInitListener = new InitListener() {
 
@@ -260,7 +261,7 @@ public class IatDemo extends Activity implements OnClickListener {
 	};
 
 	/**
-	 * 上传联系人/词表监听器。
+	 * Uploads the contact / word hint list listener
 	 */
 	private LexiconListener mLexiconListener = new LexiconListener() {
 
@@ -275,27 +276,27 @@ public class IatDemo extends Activity implements OnClickListener {
 	};
 
 	/**
-	 * 听写监听器。
+	 * Short Form ASR listener
 	 */
 	private RecognizerListener mRecognizerListener = new RecognizerListener() {
 
 		@Override
 		public void onBeginOfSpeech() {
-			// 此回调表示：sdk内部录音机已经准备好了，用户可以开始语音输入
+			// This callback indicates: The internal recorder for sdk has been ready for user to start speech input
 			showTip("Start speaking");
 		}
 
 		@Override
 		public void onError(SpeechError error) {
 			// Tips：
-			// 错误码：10118(您没有说话)，可能是录音机权限被禁，需要提示用户打开应用的录音权限。
-			// 如果使用本地功能（语记）需要提示用户开启语记的录音权限。
+			// Error code: 10118 (You don't have the speech) permission, maybe the recorder permission is prohibited，prompt user to enable the recording permission for the application.
+			// If the local feature is used, VoiceNote needs to prompt user to enable the recording permission for VoiceNote
 			showTip(error.getPlainDescription(true));
 		}
 
 		@Override
 		public void onEndOfSpeech() {
-			// 此回调表示：检测到了语音的尾端点，已经进入识别过程，不再接受语音输入
+			// This callback indicates: The end of the speech has been detected, the recognition process starts and no speech input is accepted any more
 			showTip("Stop speaking");
 		}
 
@@ -305,7 +306,7 @@ public class IatDemo extends Activity implements OnClickListener {
 			printResult(results);
 
 			if (isLast) {
-				// TODO 最后的结果
+				// TODO The final result
 			}
 		}
 
@@ -317,8 +318,8 @@ public class IatDemo extends Activity implements OnClickListener {
 
 		@Override
 		public void onEvent(int eventType, int arg1, int arg2, Bundle obj) {
-			// 以下代码用于获取与云端的会话id，当业务出错时将会话id提供给技术支持人员，可用于查询会话日志，定位出错原因
-			// 若使用本地能力，会话id为null
+			// The following codes are used to get the session id with the cloud end, when the service throws error, the id will be provided to the technical support staff for them to query session log and locate the error cause
+			// If the local feature is used, the session id is null
 			//	if (SpeechEvent.EVENT_SESSION_ID == eventType) {
 			//		String sid = obj.getString(SpeechEvent.KEY_EVENT_SESSION_ID);
 			//		Log.d(TAG, "session id =" + sid);
@@ -330,7 +331,7 @@ public class IatDemo extends Activity implements OnClickListener {
 		String text = JsonParser.parseIatResult(results.getResultString());
 
 		String sn = null;
-		// 读取json结果中的sn字段
+		// Reads the sn field in the json result
 		try {
 			JSONObject resultJson = new JSONObject(results.getResultString());
 			sn = resultJson.optString("sn");
@@ -350,7 +351,7 @@ public class IatDemo extends Activity implements OnClickListener {
 	}
 
 	/**
-	 * 听写UI监听器
+	 * Short Form ASR UI listener
 	 */
 	private RecognizerDialogListener mRecognizerDialogListener = new RecognizerDialogListener() {
 		public void onResult(RecognizerResult results, boolean isLast) {
@@ -358,7 +359,7 @@ public class IatDemo extends Activity implements OnClickListener {
 		}
 
 		/**
-		 * 识别回调错误.
+		 * Short Form ASR callback error
 		 */
 		public void onError(SpeechError error) {
 			showTip(error.getPlainDescription(true));
@@ -367,16 +368,16 @@ public class IatDemo extends Activity implements OnClickListener {
 	};
 
 	/**
-	 * 获取联系人监听器。
+	 * Gets the contact listener
 	 */
 	private ContactListener mContactListener = new ContactListener() {
 
 		@Override
 		public void onContactQueryFinish(final String contactInfos, boolean changeFlag) {
-			// 注：实际应用中除第一次上传之外，之后应该通过changeFlag判断是否需要上传，否则会造成不必要的流量.
-			// 每当联系人发生变化，该接口都将会被回调，可通过ContactManager.destroy()销毁对象，解除回调。
+			// Note: In practical application, except the first upload, you should determine whether the upload is required through changeFlag, otherwise it will lead to unnecessary network traffic
+			// Each time the contact changes, this interface is called back, and the object can be destroyed through ContactManager.destroy() and release the callback
 			// if(changeFlag) {
-			// 指定引擎类型
+			// Specify engine type
 			runOnUiThread(new Runnable() {
 				public void run() {
 					mResultText.setText(contactInfos);
@@ -398,43 +399,44 @@ public class IatDemo extends Activity implements OnClickListener {
 	}
 
 	/**
-	 * 参数设置
+	 * Parameter setting
 	 * 
 	 * @param
 	 * @return
 	 */
 	public void setParam() {
-		// 清空参数
+		// Empties the parameter
 		mIat.setParameter(SpeechConstant.PARAMS, null);
 
-		// 设置听写引擎
+		// Sets the Short Form ASR engine
 		mIat.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
-		// 设置返回结果格式
+		// Sets the returned result format
 		mIat.setParameter(SpeechConstant.RESULT_TYPE, "json");
 
 		String lag = mSharedPreferences.getString("iat_language_preference",
 				"mandarin");
 		if (lag.equals("en_us")) {
-			// 设置语言
+			// Sets the language
 			mIat.setParameter(SpeechConstant.LANGUAGE, "en_us");
 		} else {
-			// 设置语言
+			// Sets the language
 			mIat.setParameter(SpeechConstant.LANGUAGE, "zh_cn");
-			// 设置语言区域
+			// Sets the dialectal variety of the language
 			mIat.setParameter(SpeechConstant.ACCENT, lag);
 		}
 
-		// 设置语音前端点:静音超时时间，即用户多长时间不说话则当做超时处理
+		// Sets the beginning of speech: mute timeout, namely, if the user does not speak within the given time length, it's considered to be timeout
 		mIat.setParameter(SpeechConstant.VAD_BOS, mSharedPreferences.getString("iat_vadbos_preference", "4000"));
 		
-		// 设置语音后端点:后端点静音检测时间，即用户停止说话多长时间内即认为不再输入， 自动停止录音
+		// Sets the end of speech: The mute detection  for end of speech, namely, after the user stops speaking for the given time, it’s considered to be end of speech
 		mIat.setParameter(SpeechConstant.VAD_EOS, mSharedPreferences.getString("iat_vadeos_preference", "1000"));
 		
-		// 设置标点符号,设置为"0"返回结果无标点,设置为"1"返回结果有标点
+		// Sets the punctuation: Setting to "0” will return the result without punctuation, Setting to "1” will return the result with punctuation
 		mIat.setParameter(SpeechConstant.ASR_PTT, mSharedPreferences.getString("iat_punc_preference", "1"));
 		
-		// 设置音频保存路径，保存音频格式支持pcm、wav，设置路径为sd卡请注意WRITE_EXTERNAL_STORAGE权限
-		// 注：AUDIO_FORMAT参数语记需要更新版本才能生效
+		// Sets the save path of the audio, The audio save format supports pcm, wav. If you set the path to sd card, Please pay attention to the WRITE_EXTERNAL_STORAGE right
+
+		// Note: For the AUDIO_FORMAT parameter, VoiceNote needs a version update to take effect
 		mIat.setParameter(SpeechConstant.AUDIO_FORMAT,"wav");
 		mIat.setParameter(SpeechConstant.ASR_AUDIO_PATH, Environment.getExternalStorageDirectory()+"/msc/iat.wav");
 	}
@@ -442,14 +444,14 @@ public class IatDemo extends Activity implements OnClickListener {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		// 退出时释放连接
+		// Releases the connection when exiting
 		mIat.cancel();
 		mIat.destroy();
 	}
 
 	@Override
 	protected void onResume() {
-		// 开放统计 移动数据统计分析
+		// Open statistical: Statistical analysis of mobile data
 		FlowerCollector.onResume(IatDemo.this);
 		FlowerCollector.onPageStart(TAG);
 		super.onResume();
@@ -457,7 +459,7 @@ public class IatDemo extends Activity implements OnClickListener {
 
 	@Override
 	protected void onPause() {
-		// 开放统计 移动数据统计分析
+		// Open statistical: Statistical analysis of mobile data
 		FlowerCollector.onPageEnd(TAG);
 		FlowerCollector.onPause(IatDemo.this);
 		super.onPause();

@@ -29,7 +29,7 @@ import com.iflytek.ise.result.entity.Word;
  * <p>Description: </p>
  * <p>Company: www.iflytek.com</p>
  * @author iflytek
- * @date 2015年1月12日 下午5:21:53
+ * @date Jan 12, 2015 17:21:53
  */
 public class XmlResultParser {
 	
@@ -50,14 +50,14 @@ public class XmlResultParser {
 				switch (eventType) {
 				case XmlPullParser.START_TAG:
 					if ("FinalResult".equals(pullParser.getName())) {
-						// 只有一个总分的结果
+						// Result with only one score
 						finalResult = new FinalResult();
 					} else if ("ret".equals(pullParser.getName())) {
 						finalResult.ret = getInt(pullParser, "value");
 					} else if ("total_score".equals(pullParser.getName())) {
 						finalResult.total_score = getFloat(pullParser, "value");
 					} else if ("xml_result".equals(pullParser.getName())) {
-						// 详细结果
+						// Detailed result
 						return parseResult(pullParser);
 					}
 					
@@ -84,7 +84,7 @@ public class XmlResultParser {
 	
 	private Result parseResult(XmlPullParser pullParser) {
 		Result result = null;
-		// <rec_paper>标签是否已扫描到
+		// <rec_paper> Whether the label has been scanned
 		boolean rec_paperPassed = false;
 		Sentence sentence = null;
 		Word word = null;

@@ -7,42 +7,42 @@ import java.util.ArrayList;
 
 /**
  * <p>Title: Sentence</p>
- * <p>Description: 句子，对应于xml结果中的sentence标签</p>
+ * <p>Description: sentence, corresponds to the sentence label in the xml result</p>
  * <p>Company: www.iflytek.com</p>
  * @author iflytek
- * @date 2015年1月12日 下午4:10:09
+ * @date Jan 12, 2015 16:10:09
  */
 public class Sentence {
 	/**
-	 * 开始帧位置，每帧相当于10ms
+	 * The position of the beginning frame,  each frame is equivalent to 10ms
 	 */
 	public int beg_pos;
 	/**
-	 * 结束帧位置
+	 * The position of the ending frame
 	 */
 	public int end_pos;
 	/**
-	 * 句子内容
+	 * Sentence content
 	 */
 	public String content;
 	/**
-	 * 总得分
+	 * Total score
 	 */
 	public float total_score;
 	/**
-	 * 时长（单位：帧，每帧相当于10ms）（cn）
+	 * Duration (Unit: Frame, each frame is equivalent to 10ms) (cn)
 	 */
 	public int time_len;
 	/**
-	 * 句子的索引（en）
+	 * The index of sentence (en)
 	 */
 	public int index;
 	/**
-	 * 单词数（en）
+	 * The number of words (en)
 	 */
 	public int word_count;
 	/**
-	 * sentence包括的word
+	 * words included in sentence
 	 */
 	public ArrayList<Word> words;
 }

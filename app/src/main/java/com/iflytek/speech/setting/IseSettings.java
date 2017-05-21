@@ -18,7 +18,7 @@ import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.voicedemo.R;
 
 /**
- * 评测设置界面
+ * Evaluation setting interface
  */
 public class IseSettings extends PreferenceActivity {
 	private final static String PREFER_NAME = "ise_settings";

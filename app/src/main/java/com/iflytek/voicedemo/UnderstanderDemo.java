@@ -28,9 +28,9 @@ import com.iflytek.sunflower.FlowerCollector;
 
 public class UnderstanderDemo extends Activity implements OnClickListener {
 	private static String TAG = UnderstanderDemo.class.getSimpleName();
-	// 语义理解对象（语音到语义）。
+	// Semantic understanding object (Speech to Semantic)
 	private SpeechUnderstander mSpeechUnderstander;
-	// 语义理解对象（文本到语义）。
+	// Semantic understanding object (Text to Semantic)
 	private TextUnderstander   mTextUnderstander;	
 	private Toast mToast;	
 	private EditText mUnderstanderText;
@@ -45,11 +45,11 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 		
 		initLayout();
 		/**
-		 * 申请的appid时，我们为开发者开通了开放语义（语义理解）
-		 * 由于语义理解的场景繁多，需开发自己去开放语义平台：http://www.xfyun.cn/services/osp
-		 * 配置相应的语音场景，才能使用语义理解，否则文本理解将不能使用，语义理解将返回听写结果。
+		 * In the appid applied by the developer, we have enabled Open Semantic (Semantic Understanding)
+		 * Because of the scenarios for semantic understanding is various, the developers need to visit Open Semantic Platform: http://www.xfyun.cn/services/osp
+		 * to configure the appropriate speech understanding, otherwise the text understanding will not work, the semantic understanding will return ASR result
 		 */
-		// 初始化对象
+		// Initializes the object
 		mSpeechUnderstander = SpeechUnderstander.createUnderstander(UnderstanderDemo.this, mSpeechUdrInitListener);
 		mTextUnderstander = TextUnderstander.createTextUnderstander(UnderstanderDemo.this, mTextUdrInitListener);
 		
@@ -57,7 +57,7 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 	}
 	
 	/**
-	 * 初始化Layout。
+	 * Initializes Layout
 	 */
 	private void initLayout(){
 		findViewById(R.id.text_understander).setOnClickListener(UnderstanderDemo.this);
@@ -73,7 +73,7 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 	}
 	
     /**
-     * 初始化监听器（语音到语义）。
+     * Initializes the listener (Speech to Semantic)
      */
     private InitListener mSpeechUdrInitListener = new InitListener() {
     	
@@ -87,7 +87,7 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
     };
     
     /**
-     * 初始化监听器（文本到语义）。
+     * Initializes the listener (Text to Semantic)
      */
     private InitListener mTextUdrInitListener = new InitListener() {
 
@@ -101,16 +101,16 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
     };
 	
     
-	int ret = 0;// 函数调用返回值
+	int ret = 0;// Returned value for function call
 	@Override
 	public void onClick(View view) {				
 		switch (view.getId()) {
-		// 进入参数设置页面
+		// Go to the Parameter setting page
 		case R.id.image_understander_set:
 			Intent intent = new Intent(UnderstanderDemo.this, UnderstanderSettings.class);
 			startActivity(intent);
 			break;
-		// 开始文本理解
+		// Starts the text understanding
 		case R.id.text_understander:
 			mUnderstanderText.setText("");
 			String text = "What is the weather like tomorrow in San Francisco?";
@@ -127,13 +127,13 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 				}
 			}
 			break;
-		// 开始语音理解
+		// Starts the speech understanding
 		case R.id.start_understander:
 			mUnderstanderText.setText("");
-			// 设置参数
+			// Sets parameter
 			setParam();
 	
-			if(mSpeechUnderstander.isUnderstanding()){// 开始前检查状态
+			if(mSpeechUnderstander.isUnderstanding()){// Checks the status before start
 				mSpeechUnderstander.stopUnderstanding();
 				showTip("Stop recording");
 			}else {
@@ -145,12 +145,12 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 				}
 			}
 			break;
-		// 停止语音理解
+		// Stops the speech understanding
 		case R.id.understander_stop:
 			mSpeechUnderstander.stopUnderstanding();
 			showTip("Stop semantic understanding");
 			break;
-		// 取消语音理解
+		// Cancels the speech understanding
 		case R.id.understander_cancel:
 			mSpeechUnderstander.cancel();
 			showTip("Cancel semantic understanding");
@@ -165,7 +165,7 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 		@Override
 		public void onResult(final UnderstanderResult result) {
 			if (null != result) {
-				// 显示
+				// show
 				String text = result.getResultString();
 				if (!TextUtils.isEmpty(text)) {
 					mUnderstanderText.setText(text);
@@ -178,14 +178,14 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 		
 		@Override
 		public void onError(SpeechError error) {
-			// 文本语义不能使用回调错误码14002，请确认您下载sdk时是否勾选语义场景和私有语义的发布
+			// The text semantic can not use callback error code 14002, please confirm if you checked the publication for  semantic scenario and private semantic when downloading the sdk
 			showTip("onError Code："	+ error.getErrorCode());
 			
 		}
 	};
 	
     /**
-     * 语义理解回调。
+     * Semantic understanding callback
      */
     private SpeechUnderstanderListener mSpeechUnderstanderListener = new SpeechUnderstanderListener() {
 
@@ -194,7 +194,7 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 			if (null != result) {
 				Log.d(TAG, result.getResultString());
 				
-				// 显示
+				// show
 				String text = result.getResultString();
 				if (!TextUtils.isEmpty(text)) {
 					mUnderstanderText.setText(text);
@@ -212,13 +212,13 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
         
         @Override
         public void onEndOfSpeech() {
-        	// 此回调表示：检测到了语音的尾端点，已经进入识别过程，不再接受语音输入
+        	// This callback indicates: the end of the speech has been detected, the recognition process starts and no speech input is accepted
         	showTip("Stop speaking");
         }
         
         @Override
         public void onBeginOfSpeech() {
-        	// 此回调表示：sdk内部录音机已经准备好了，用户可以开始语音输入
+        	// This callback indicates: the internal recorder for sdk has been ready for user to start speech input
         	showTip("Start speaking");
         }
 
@@ -229,7 +229,7 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 
 		@Override
 		public void onEvent(int eventType, int arg1, int arg2, Bundle obj) {
-			// 以下代码用于获取与云端的会话id，当业务出错时将会话id提供给技术支持人员，可用于查询会话日志，定位出错原因
+			// The following codes are used to get the session id used for cloud, when the service throws error, the id will be provided to the technical support staff for them to query session log and locate the error cause
 			//	if (SpeechEvent.EVENT_SESSION_ID == eventType) {
 			//		String sid = obj.getString(SpeechEvent.KEY_EVENT_SESSION_ID);
 			//		Log.d(TAG, "session id =" + sid);
@@ -240,7 +240,7 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
     @Override
     protected void onDestroy() {
     	super.onDestroy();
-        // 退出时释放连接
+        // Releases the connection when exiting
     	mSpeechUnderstander.cancel();
     	mSpeechUnderstander.destroy();
     	if(mTextUnderstander.isUnderstanding())
@@ -254,39 +254,40 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 	}
 	
 	/**
-	 * 参数设置
+	 * Parameter setting
 	 * @param
 	 * @return 
 	 */
 	public void setParam(){
 		String lang = mSharedPreferences.getString("understander_language_preference", "mandarin");
 		if (lang.equals("en_us")) {
-			// 设置语言
+			// Sets the language
 			mSpeechUnderstander.setParameter(SpeechConstant.LANGUAGE, "en_us");
 		}else {
-			// 设置语言
+			// Sets the language
 			mSpeechUnderstander.setParameter(SpeechConstant.LANGUAGE, "zh_cn");
-			// 设置语言区域
+			// Sets the dialectal variety of the language
 			mSpeechUnderstander.setParameter(SpeechConstant.ACCENT, lang);
 		}
-		// 设置语音前端点:静音超时时间，即用户多长时间不说话则当做超时处理
+		// Sets the beginning of speech: mute timeout, namely, if the user does not speak within the given time length, it's considered to be timeout
 		mSpeechUnderstander.setParameter(SpeechConstant.VAD_BOS, mSharedPreferences.getString("understander_vadbos_preference", "4000"));
 		
-		// 设置语音后端点:后端点静音检测时间，即用户停止说话多长时间内即认为不再输入， 自动停止录音
+		// Sets the end of speech: The mute detection for end of speech, namely, after the user stops speaking for the given time, it’s considered to be end of speech
 		mSpeechUnderstander.setParameter(SpeechConstant.VAD_EOS, mSharedPreferences.getString("understander_vadeos_preference", "1000"));
 		
-		// 设置标点符号，默认：1（有标点）
+		// Whether involves punctuation marks, default value: 1 (contains punctuation)
 		mSpeechUnderstander.setParameter(SpeechConstant.ASR_PTT, mSharedPreferences.getString("understander_punc_preference", "1"));
 		
-		// 设置音频保存路径，保存音频格式支持pcm、wav，设置路径为sd卡请注意WRITE_EXTERNAL_STORAGE权限
-		// 注：AUDIO_FORMAT参数语记需要更新版本才能生效
+		// Sets the save path of the audio, The audio save format supports pcm, wav. If you set the path to sd card, Please pay attention to the WRITE_EXTERNAL_STORAGE right
+
+		// Note:   For the AUDIO_FORMAT parameter, VoiceNote needs to update version to take effect
 		mSpeechUnderstander.setParameter(SpeechConstant.AUDIO_FORMAT, "wav");
 		mSpeechUnderstander.setParameter(SpeechConstant.ASR_AUDIO_PATH, Environment.getExternalStorageDirectory()+"/msc/sud.wav");
 	}	
 	
 	@Override
 	protected void onResume() {
-		//移动数据统计分析
+		// Statistical analysis of mobile data
 		FlowerCollector.onResume(UnderstanderDemo.this);
 		FlowerCollector.onPageStart(TAG);
 		super.onResume();
@@ -294,7 +295,7 @@ public class UnderstanderDemo extends Activity implements OnClickListener {
 	
 	@Override
 	protected void onPause() {
-		//移动数据统计分析
+		// Statistical analysis of mobile data
 		FlowerCollector.onPageEnd(TAG);
 		FlowerCollector.onPause(UnderstanderDemo.this);
 		super.onPause();

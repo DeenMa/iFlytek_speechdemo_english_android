@@ -25,7 +25,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * 语音评测demo
+ * Speech Evaluation demo
  */
 public class IseDemo extends Activity implements OnClickListener {
 	private static String TAG = IseDemo.class.getSimpleName();
@@ -38,18 +38,18 @@ public class IseDemo extends Activity implements OnClickListener {
 	private Button mIseStartButton;
 	private Toast mToast;
 
-	// 评测语种
+	// Evaluation language
 	private String language;
-	// 评测题型
+	// Evaluation question type
 	private String category;
-	// 结果等级
+	// Result level
 	private String result_level;
 	
 	private String mLastResult;
 	private SpeechEvaluator mIse;
 	
 	
-	// 评测监听接口
+	// Evaluation listener interface
 	private EvaluatorListener mEvaluatorListener = new EvaluatorListener() {
 		
 		@Override
@@ -84,13 +84,13 @@ public class IseDemo extends Activity implements OnClickListener {
 
 		@Override
 		public void onBeginOfSpeech() {
-			// 此回调表示：sdk内部录音机已经准备好了，用户可以开始语音输入
+			// This callback indicates: the internal recorder of SDK has been ready for user to start speech input
 			Log.d(TAG, "evaluator begin");
 		}
 
 		@Override
 		public void onEndOfSpeech() {
-			// 此回调表示：检测到了语音的尾端点，已经进入识别过程，不再接受语音输入
+			// This callback indicates: the end of speech has been detected, the recognition process starts and no speech input is accepted any more
 			Log.d(TAG, "evaluator stoped");
 		}
 
@@ -102,7 +102,8 @@ public class IseDemo extends Activity implements OnClickListener {
 
 		@Override
 		public void onEvent(int eventType, int arg1, int arg2, Bundle obj) {
-			// 以下代码用于获取与云端的会话id，当业务出错时将会话id提供给技术支持人员，可用于查询会话日志，定位出错原因
+			// The following codes are used to get the session id used for cloud,
+			// when the service throws error, the id will be provided to the technical support staff for them
 			//	if (SpeechEvent.EVENT_SESSION_ID == eventType) {
 			//		String sid = obj.getString(SpeechEvent.KEY_EVENT_SESSION_ID);
 			//		Log.d(TAG, "session id =" + sid);
@@ -157,7 +158,7 @@ public class IseDemo extends Activity implements OnClickListener {
 				mIse.startEvaluating(evaText, null, mEvaluatorListener);
 				break;
 			case R.id.ise_parse:
-				// 解析最终结果
+				// Parse the final result
 				if (!TextUtils.isEmpty(mLastResult)) {
 					XmlResultParser resultParser = new XmlResultParser();
 					Result result = resultParser.parse(mLastResult);
@@ -205,7 +206,7 @@ public class IseDemo extends Activity implements OnClickListener {
 		}
 	}
 	
-	// 设置评测试题
+	// Sets the evaluation question
 	private void setEvaText() {
 		SharedPreferences pref = getSharedPreferences(PREFER_NAME, MODE_PRIVATE);
 		language = pref.getString(SpeechConstant.LANGUAGE, "zh_cn");
@@ -243,17 +244,17 @@ public class IseDemo extends Activity implements OnClickListener {
 	}
 	private void setParams() {
 		SharedPreferences pref = getSharedPreferences(PREFER_NAME, MODE_PRIVATE);
-		// 设置评测语言
+		// Sets the evaluation language
 		language = pref.getString(SpeechConstant.LANGUAGE, "zh_cn");
-		// 设置需要评测的类型
+		// Sets the required evaluation type
 		category = pref.getString(SpeechConstant.ISE_CATEGORY, "read_sentence");
-		// 设置结果等级（中文仅支持complete）
+		// Sets the result level (Only 'complete' is supported for Chinese) 设置结果等级（中文仅支持complete）
 		result_level = pref.getString(SpeechConstant.RESULT_LEVEL, "complete");
-		// 设置语音前端点:静音超时时间，即用户多长时间不说话则当做超时处理
+		// Sets mute timeout for the beginning of speech: namely, if the user does not speak within the given time length, it's considered to be timeout
 		String vad_bos = pref.getString(SpeechConstant.VAD_BOS, "5000");
-		// 设置语音后端点:后端点静音检测时间，即用户停止说话多长时间内即认为不再输入， 自动停止录音
+		// Set mute timeout for the end of speech: namely, if the user stops speaking within the given time, it is considered no longer recording and will stop recording automatically
 		String vad_eos = pref.getString(SpeechConstant.VAD_EOS, "1800");
-		// 语音输入超时时间，即用户最多可以连续说多长时间；
+		// Speech input timeout , namely, the longest time for user to continually speak
 		String speech_timeout = pref.getString(SpeechConstant.KEY_SPEECH_TIMEOUT, "-1");
 		
 		mIse.setParameter(SpeechConstant.LANGUAGE, language);
@@ -263,16 +264,15 @@ public class IseDemo extends Activity implements OnClickListener {
 		mIse.setParameter(SpeechConstant.VAD_EOS, vad_eos);
 		mIse.setParameter(SpeechConstant.KEY_SPEECH_TIMEOUT, speech_timeout);
 		mIse.setParameter(SpeechConstant.RESULT_LEVEL, result_level);
-		
-		// 设置音频保存路径，保存音频格式支持pcm、wav，设置路径为sd卡请注意WRITE_EXTERNAL_STORAGE权限
-		// 注：AUDIO_FORMAT参数语记需要更新版本才能生效
+		// Sets the save path of the audio. The audio save format supports pcm, wav. If you set the path to sd card, Please pay attention to the WRITE_EXTERNAL_STORAGE right
+		// Note: For the AUDIO_FORMAT parameter, the VoiceNote needs a version update to take effect
 		mIse.setParameter(SpeechConstant.AUDIO_FORMAT,"wav");
 		mIse.setParameter(SpeechConstant.ISE_AUDIO_PATH, Environment.getExternalStorageDirectory().getAbsolutePath() + "/msc/ise.wav");
 	}
 	
 	@Override
 	protected void onResume() {
-		// 开放统计 移动数据统计分析
+		// Open statistical: Statistical analysis of mobile data
 		FlowerCollector.onResume(IseDemo.this);
 		FlowerCollector.onPageStart(TAG);
 		super.onResume();
@@ -280,7 +280,7 @@ public class IseDemo extends Activity implements OnClickListener {
 	
 	@Override
 	protected void onPause() {
-		// 开放统计 移动数据统计分析
+		// Open statistical: Statistical analysis of mobile data
 		FlowerCollector.onPageEnd(TAG);
 		FlowerCollector.onPause(IseDemo.this);
 		super.onPause();

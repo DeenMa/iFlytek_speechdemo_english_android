@@ -16,43 +16,43 @@ import com.iflytek.ise.result.entity.Sentence;
  */
 public class Result {
 	/**
-	 * 评测语种：en（英文）、cn（中文）
+	 * Evaluation language：en (English), cn (Chinese)
 	 */
 	public String language;
 	/**
-	 * 评测种类：read_syllable（cn单字）、read_word（词语）、read_sentence（句子） 
+	 * Evaluation type：read_syllable（syllable）、read_word（phrase）、read_sentence（sentence）
 	 */
 	public String category;
 	/**
-	 * 开始帧位置，每帧相当于10ms
+	 * The position of the beginning frame,  each frame is equivalent to 10ms
 	 */
 	public int beg_pos;
 	/**
-	 * 结束帧位置
+	 * The position of ending frame
 	 */
 	public int end_pos;
 	/**
-	 * 评测内容
+	 * Evaluation content
 	 */
 	public String content;
 	/**
-	 * 总得分
+	 * Total score
 	 */
 	public float total_score;
 	/**
-	 * 时长（cn）
+	 * Duration (cn)
 	 */
 	public int time_len;
 	/**
-	 * 异常信息（en）
+	 * Exception information (en)
 	 */
 	public String except_info;
 	/**
-	 * 是否乱读（cn）
+	 * Whether read in chaos (cn)
 	 */
 	public boolean is_rejected;
 	 /**
-	 * xml结果中的sentence标签
+	 * the sentence label in the xml result
 	 */
 	public ArrayList<Sentence> sentences;
 }

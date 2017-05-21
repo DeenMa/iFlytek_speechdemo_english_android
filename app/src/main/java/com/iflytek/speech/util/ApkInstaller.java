@@ -13,7 +13,7 @@ import com.iflytek.cloud.SpeechUtility;
 
 
 /**
- * 弹出提示框，下载服务组件
+ * Pops a prompt box to download service component
  */
 public class ApkInstaller {
 	private Activity mActivity ;
@@ -45,10 +45,10 @@ public class ApkInstaller {
 		return;
 	}
 	/**
-	 * 如果服务组件没有安装打开语音服务组件下载页面，进行下载后安装。
+	 * If the service component did not open the download page to install the speech service component, please install after downloading
 	 */
 	private boolean processInstall(Context context ,String url,String assetsApk){
-		//直接下载方式
+		// Direct download mode
 		Uri uri = Uri.parse(url);
 		Intent it = new Intent(Intent.ACTION_VIEW, uri);
 		context.startActivity(it);
